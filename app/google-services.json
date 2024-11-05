@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445254835079",
+    "project_id": "login-duan1-11052024",
+    "storage_bucket": "login-duan1-11052024.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445254835079:android:437d0c8b18d4f10c87d122",
+        "android_client_info": {
+          "package_name": "com.example.gymbody"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiDrDkD2qC-ny32FwFPh1DPfhVjo5u6vU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
