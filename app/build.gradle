@@ -40,6 +40,9 @@ dependencies {
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:33.5.1')
 
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.29")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     // Thêm thư viện Firebase mà không cần chỉ định phiên bản
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
