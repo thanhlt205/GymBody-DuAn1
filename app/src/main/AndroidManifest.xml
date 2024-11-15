@@ -13,6 +13,9 @@
         android:theme="@style/Theme.GymBody"
         tools:targetApi="31">
         <activity
+            android:name=".chucNang_user.ShowVideoActivity"
+            android:exported="false" />
+        <activity
             android:name=".chucNang_user.TimKiemActivity"
             android:exported="false" />
         <activity
@@ -27,8 +30,8 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

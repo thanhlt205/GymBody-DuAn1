@@ -4,20 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.gymbody.Login;
 import com.example.gymbody.R;
+import com.example.gymbody.adapterVideo.AnhVideoAdapter;
+import com.example.gymbody.dao.AnhVideoDAO;
+import com.example.gymbody.model.anhVideoModel;
+
+import java.util.ArrayList;
 
 public class TrangChuFragment extends Fragment {
     private EditText edtTimKiem;
+    private RecyclerView recyclerView;
+    private AnhVideoDAO anhVideoDAO;
+    ArrayList<anhVideoModel> arrayList = new ArrayList<>();
 
     public TrangChuFragment() {
         // Required empty public constructor
@@ -39,6 +47,27 @@ public class TrangChuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         edtTimKiem = view.findViewById(R.id.edtTimKiem);
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        anhVideoDAO = new AnhVideoDAO(getContext());
+
+        // Lấy dữ liệu từ cơ sở dữ liệu
+        arrayList = anhVideoDAO.getAll();
+        if (arrayList == null || arrayList.isEmpty()) {
+            Log.e("RecyclerView", "No data found in database");
+        } else {
+            Log.e("RecyclerView", "Data found in database");
+        }
+
+        // Hiển thị dữ liệu vào RecyclerView
+        AnhVideoAdapter adapterAnhVideo = new AnhVideoAdapter(getContext(), arrayList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapterAnhVideo);
+
+        // Thong bao thay doi du lieu
+        adapterAnhVideo.notifyDataSetChanged();
+
         edtTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

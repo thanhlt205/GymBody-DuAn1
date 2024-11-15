@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gymbody.Login;
 import com.example.gymbody.R;
@@ -57,6 +58,19 @@ public class CaiDatFragment extends Fragment {
 
         String email = mAuth.getCurrentUser().getEmail();
         txtNameCaiDat.setText("Hi! "+email);
+
+        btnChonGiaoDien.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        });
+        btnVideoYeuThich.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        });
+        btnDoiNgonNgu.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        });
+        btnThongBao.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        });
 
         btnDangXuat.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

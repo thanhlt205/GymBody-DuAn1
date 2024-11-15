@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     tools:context=".chucNang_user.CaiDatFragment">
 
     <ImageView
@@ -39,9 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Hi! thanhltph49838@gmail.com"
+        android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgAnhCaiDat" />
@@ -66,11 +68,11 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/icon_chongiaodien"
-        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien"
-        app:layout_constraintStart_toStartOf="@id/btnChonGiaoDien"
         app:layout_constraintBottom_toBottomOf="@id/btnChonGiaoDien"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="@id/btnChonGiaoDien"
+        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
 
     <Button
         android:id="@+id/btnVideoYeuThich"
@@ -92,11 +94,11 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/icon_yeu_thich"
-        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien"
-        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
         app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
+        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
 
     <Button
         android:id="@+id/btnDoiNgonNgu"
@@ -118,11 +120,11 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/icon_doingongu"
-        app:layout_constraintTop_toTopOf="@id/btnDoiNgonNgu"
-        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
         app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
+        app:layout_constraintTop_toTopOf="@id/btnDoiNgonNgu" />
 
     <Button
         android:id="@+id/btnThongBao"
@@ -144,11 +146,11 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/icon_thongbao"
-        app:layout_constraintTop_toTopOf="@id/btnThongBao"
-        app:layout_constraintStart_toStartOf="@id/btnThongBao"
         app:layout_constraintBottom_toBottomOf="@id/btnThongBao"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="@id/btnThongBao"
+        app:layout_constraintTop_toTopOf="@id/btnThongBao" />
 
     <Button
         android:id="@+id/btnDangXuat"
@@ -170,10 +172,10 @@
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginStart="20dp"
         android:src="@drawable/icon_dang_xuat"
-        app:layout_constraintTop_toTopOf="@id/btnDangXuat"
-        app:layout_constraintStart_toStartOf="@id/btnDangXuat"
         app:layout_constraintBottom_toBottomOf="@id/btnDangXuat"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="@id/btnDangXuat"
+        app:layout_constraintTop_toTopOf="@id/btnDangXuat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
