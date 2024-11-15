@@ -6,7 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.gymbody.chucNang_user.CaiDatFragment;
-import com.example.gymbody.chucNang_user.LoaiBaiTapFragment;
+import com.example.gymbody.chucNang_user.ChatFragment;
+import com.example.gymbody.chucNang_user.DangVideoFragment;
 import com.example.gymbody.chucNang_user.TrangChuFragment;
 
 public class ViewPagerAdapterUser extends FragmentPagerAdapter {
@@ -22,8 +23,10 @@ public class ViewPagerAdapterUser extends FragmentPagerAdapter {
             case 0:
                 return new TrangChuFragment();
             case 1:
-                return new LoaiBaiTapFragment();
+                return new DangVideoFragment();
             case 2:
+                return new ChatFragment();
+            case 3:
                 return new CaiDatFragment();
             default:
                 return null;
@@ -32,6 +35,6 @@ public class ViewPagerAdapterUser extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

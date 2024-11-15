@@ -6,9 +6,14 @@
         android:title="Trang Chủ"/>
 
     <item
-        android:id="@+id/iconLoaiBaiTap"
+        android:id="@+id/iconDangVideo"
         android:icon="@drawable/icon_baitap"
-        android:title="Chủ Đề Tập"/>
+        android:title="Đăng Video"/>
+
+    <item
+        android:id="@+id/iconChat"
+        android:icon="@drawable/icon_chat"
+        android:title="Chat"/>
 
     <item
         android:id="@+id/iconCaiDat"

@@ -51,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
                         buttonNavigation.getMenu().findItem(R.id.iconTrangChu).setChecked(true);
                         break;
                     case 1:
-                        buttonNavigation.getMenu().findItem(R.id.iconLoaiBaiTap).setChecked(true);
+                        buttonNavigation.getMenu().findItem(R.id.iconDangVideo).setChecked(true);
                         break;
                     case 2:
+                        buttonNavigation.getMenu().findItem(R.id.iconChat).setChecked(true);
+                        break;
+                    case 3:
                         buttonNavigation.getMenu().findItem(R.id.iconCaiDat).setChecked(true);
                         break;
                 }
@@ -72,11 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.iconTrangChu) {
                     viewPager.setCurrentItem(0);
                 }
-                if (itemId == R.id.iconLoaiBaiTap) {
+                if (itemId == R.id.iconDangVideo) {
                     viewPager.setCurrentItem(1);
                 }
-                if (itemId == R.id.iconCaiDat) {
+                if (itemId == R.id.iconChat) {
                     viewPager.setCurrentItem(2);
+                }
+                if (itemId == R.id.iconCaiDat) {
+                    viewPager.setCurrentItem(3);
                 }
                 return true;
             }

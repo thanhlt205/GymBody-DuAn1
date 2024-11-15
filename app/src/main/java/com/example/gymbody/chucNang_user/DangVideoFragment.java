@@ -10,19 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.gymbody.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoaiBaiTapFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class LoaiBaiTapFragment extends Fragment {
+public class DangVideoFragment extends Fragment {
 
 
-    public LoaiBaiTapFragment() {
+    public DangVideoFragment() {
         // Required empty public constructor
     }
-    public static LoaiBaiTapFragment newInstance() {
-        LoaiBaiTapFragment fragment = new LoaiBaiTapFragment();
+    public static DangVideoFragment newInstance() {
+        DangVideoFragment fragment = new DangVideoFragment();
         return fragment;
     }
 
@@ -35,6 +30,6 @@ public class LoaiBaiTapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loai_bai_tap, container, false);
+        return inflater.inflate(R.layout.fragment_dang_video, container, false);
     }
 }

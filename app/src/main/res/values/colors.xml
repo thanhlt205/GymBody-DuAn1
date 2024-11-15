@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="clorBottomNavigation">#fcffcd</color>
     <color name="colorIcon">#f8b800</color>
+    <color name="colorBottom">#68b7c1</color>
     <color name="colorEdt">#909179</color>
+    <color name="clorBottomCaiDat">#F2F2D7</color>
 </resources>

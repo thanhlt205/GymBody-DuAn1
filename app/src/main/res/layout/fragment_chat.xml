@@ -2,14 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/clorBottomNavigation"
     android:layout_height="match_parent"
-    tools:context=".chucNang_user.LoaiBaiTapFragment">
+    tools:context=".chucNang_user.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Loại Bài Tập" />
+        android:text="Chat đang được phát triển" />
 
 </FrameLayout>
