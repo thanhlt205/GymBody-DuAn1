@@ -71,7 +71,6 @@ public class CaiDatFragment extends Fragment {
         btnThongBao.setOnClickListener(v -> {
             Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
         });
-
         btnDangXuat.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Thông báo");

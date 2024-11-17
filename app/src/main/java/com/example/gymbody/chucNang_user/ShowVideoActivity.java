@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.gymbody.R;
 import com.example.gymbody.dbHelperVideo.AnhVideoDBhelper;
 
@@ -34,13 +35,18 @@ public class ShowVideoActivity extends AppCompatActivity {
         Log.e("ID", "check: "+ idVideo );
 
         if (idVideo != null) {
-//             // Lấy đường dẫn video từ cơ sở dữ liệu
+            // Lấy đường dẫn video từ cơ sở dữ liệu
             VideoView videoView = findViewById(R.id.viewVideoShow);
             AnhVideoDBhelper dbHelper = new AnhVideoDBhelper(this);
             String videoUrl = dbHelper.getVideoUrlById(Integer.parseInt(idVideo));
-            videoView.setVideoURI(Uri.parse(videoUrl));
-            Log.e("VideoUrl", "VideoUrl: "+ videoUrl );
-            videoView.start();
+
+            if (videoUrl != null && !videoUrl.isEmpty()) {
+                videoView.setVideoURI(Uri.parse(videoUrl)); // Thiết lập URI của video
+                videoView.start(); // Bắt đầu phát video
+            } else {
+                Log.e("VideoUrl", "Không tìm thấy URL video");
+                Toast.makeText(this, "Không tìm thấy video", Toast.LENGTH_SHORT).show();
+            }
         } else {
             // Xử lý trường hợp không có ID video
             Toast.makeText(this, "Không tìm thấy ID video", Toast.LENGTH_SHORT).show();

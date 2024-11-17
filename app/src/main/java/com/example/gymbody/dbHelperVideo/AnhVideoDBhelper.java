@@ -60,13 +60,13 @@ public class AnhVideoDBhelper extends SQLiteOpenHelper {
                     COLUMN_TIEUDE + ", " +
                     COLUMN_NGAY + ", " +
                     COLUMN_ANH_URL + ", " +
-                    COLUMN_VIDEO_URL + ") VALUES ('Bài tập ngực', '2024-11-15', 'https://baohanam.com.vn/DATA/IMAGES/2022/09/09/20220909085625-56niem-vui-dc-mua.jpg', 'https://v3.tiktokcdn.com/63bab192b62f693367571026f1204d05/6737c868/video/tos/alisg/tos-alisg-pve-0037c001/ognwIkfEADE0TgLOEzgBfFFsuBURMENKRMJwVQ/?a=1180&bti=OjR2KXMxaGRzZ3dAajo6NkAvOm1mXm92aSsxcWAjMTQzYA%3D%3D&ch=0&cr=0&dr=0&er=0&lr=all&net=0&cd=0%7C0%7C0%7C0&cv=1&br=4372&bt=2186&cs=0&ds=6&ft=~jVQCzEKhWH6BYe~glLo0PD1&mime_type=video_mp4&qs=0&rc=ODk3ZjQ8ZTNnaWg1PDNnZEBpM3kza3A5cjZmdjMzODczNEA0MS8vMDM1NWMxLzVfYV40YSMvZ2svMmQ0a2ZgLS1kMTFzcw%3D%3D&vvpl=1&l=202411151616187898949A2547C508EEB0&btag=e00088000&cc=6')";
+                    COLUMN_VIDEO_URL + ") VALUES ('Bài tập ngực', '2024-11-15', 'https://baohanam.com.vn/DATA/IMAGES/2022/09/09/20220909085625-56niem-vui-dc-mua.jpg', 'content://media/external/video/media/2434')";
 
             String insert2 = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_TIEUDE + ", " + COLUMN_NGAY + ", " + COLUMN_ANH_URL + ", " + COLUMN_VIDEO_URL + ") " +
-                    "VALUES ('Bài tập chân', '2024-12-16', 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/8/23/1084256/295497942_2922294937.jpg', 'https://youtu.be/iRM2YsHioB4')";
+                    "VALUES ('Bài tập chân', '2024-12-16', 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/8/23/1084256/295497942_2922294937.jpg', 'content://media/external/video/media/3771')";
 
             String insert3 = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_TIEUDE + ", " + COLUMN_NGAY + ", " + COLUMN_ANH_URL + ", " + COLUMN_VIDEO_URL + ") " +
-                    "VALUES ('Bài tập tay', '2024-10-15', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-nen-trai-dat.jpg', 'https://v3.tiktokcdn.com/63bab192b62f693367571026f1204d05/6737c868/video/tos/alisg/tos-alisg-pve-0037c001/ognwIkfEADE0TgLOEzgBfFFsuBURMENKRMJwVQ/?a=1180&bti=OjR2KXMxaGRzZ3dAajo6NkAvOm1mXm92aSsxcWAjMTQzYA%3D%3D&ch=0&cr=0&dr=0&er=0&lr=all&net=0&cd=0%7C0%7C0%7C0&cv=1&br=4372&bt=2186&cs=0&ds=6&ft=~jVQCzEKhWH6BYe~glLo0PD1&mime_type=video_mp4&qs=0&rc=ODk3ZjQ8ZTNnaWg1PDNnZEBpM3kza3A5cjZmdjMzODczNEA0MS8vMDM1NWMxLzVfYV40YSMvZ2svMmQ0a2ZgLS1kMTFzcw%3D%3D&vvpl=1&l=202411151616187898949A2547C508EEB0&btag=e00088000&cc=6')";
+                    "VALUES ('Bài tập tay', '2024-10-15', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-nen-trai-dat.jpg', 'content://media/external/video/media/2434')";
 
             db.execSQL(insert1);
             db.execSQL(insert2);
@@ -74,6 +74,26 @@ public class AnhVideoDBhelper extends SQLiteOpenHelper {
             Log.e("Database", "Sample data inserted successfully");
         } catch (Exception e) {
             Log.e("Database Error", "Error inserting sample data: " + e.getMessage());
+        }
+    }
+    public void insert(String tieude, String ngay, String anhUrl, String videoUrl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            // Câu lệnh INSERT vào bảng anhVideo
+            String insertQuery = "INSERT INTO " + TABLE_NAME + " (" +
+                    COLUMN_TIEUDE + ", " +
+                    COLUMN_NGAY + ", " +
+                    COLUMN_ANH_URL + ", " +
+                    COLUMN_VIDEO_URL + ") VALUES (?, ?, ?, ?)";
+
+            // Thực hiện câu lệnh INSERT
+            db.execSQL(insertQuery, new Object[]{tieude, ngay, anhUrl, videoUrl});
+            Log.e("Database", "Data inserted successfully");
+        } catch (Exception e) {
+            Log.e("Database Error", "Error inserting data: " + e.getMessage());
+        } finally {
+            db.close();
         }
     }
 

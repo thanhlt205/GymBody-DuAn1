@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.gymbody.R;
 import com.example.gymbody.chucNang_user.ShowVideoActivity;
 import com.example.gymbody.model.anhVideoModel;
@@ -34,39 +34,41 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
     @Override
     public AnhVideoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_rcv, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AnhVideoAdapter.ViewHolder holder, int position) {
-//        anhVideoModel anhVideoModel = arrayList.get(holder.getAdapterPosition());
-        holder.txtTieuDeRcv.setText(arrayList.get(position).getTen());
-        holder.txtNgayRcv.setText("Ngày đăng: "+arrayList.get(position).getNgay());
-        // Sử dụng Glide để tải ảnh từ URL
+        anhVideoModel model = arrayList.get(position);
+
+        holder.txtTieuDeRcv.setText(model.getTen());
+        holder.txtNgayRcv.setText("Ngày đăng: " + model.getNgay());
+
+        // Lấy đường dẫn ảnh từ model và tải nó vào ImageView
+        String imageUrl = model.getAnh();
+        Log.e("TAG", "Image URL: " + imageUrl);  // Kiểm tra đường dẫn ảnh trong log
+
+        // Sử dụng Glide để tải ảnh vào ImageView
         Glide.with(context)
-                .load(arrayList.get(position).getAnh()) // URL của ảnh
-                .placeholder(R.drawable.edit) // Hiển thị khi đang tải
-                .error(R.drawable.ic_launcher_foreground) // Hiển thị khi lỗi tải ảnh
-                .into(holder.imgAnhRcv); // ImageView để hiển thị
-//        Uri uri = Uri.parse(arrayList.get(position).getAnh());
-//        Log.e("TAG", "urianhhhhhhhh: "+uri );
-//        holder.imgAnhRcv.setImageURI(uri);
+                .load(imageUrl)  // Tải ảnh từ URL hoặc URI
+                .placeholder(R.drawable.edit)  // Placeholder khi ảnh đang tải
+                .error(R.drawable.ic_launcher_foreground)  // Hình ảnh hiển thị khi có lỗi
+                .diskCacheStrategy(DiskCacheStrategy.ALL)  // Cải thiện hiệu suất với cache
+                .into(holder.imgAnhRcv);
 
+        // Xử lý sự kiện khi người dùng click vào item
         holder.itemView.setOnClickListener(v -> {
-//            Toast.makeText(context, "Xin lỗi! Đang sử lý video", Toast.LENGTH_SHORT).show();
-            // Thêm xử lý khi item được nhấn
             Intent intent = new Intent(context, ShowVideoActivity.class);
-            intent.putExtra("id", String.valueOf(arrayList.get(position).getId()));
+            intent.putExtra("id", String.valueOf(model.getId()));
             context.startActivity(intent);
-            Log.e("ID", "IDDDDDDDDDDDDDDDDĐ: "+ arrayList.get(position).getId() );
+            Log.e("ID", "ID của video: " + model.getId());
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        // Trả về số lượng phần tử trong danh sách
+        return arrayList != null ? arrayList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

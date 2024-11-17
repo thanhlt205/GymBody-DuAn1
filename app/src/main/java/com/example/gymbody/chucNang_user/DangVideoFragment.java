@@ -61,7 +61,9 @@ public class DangVideoFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,15 +78,20 @@ public class DangVideoFragment extends Fragment {
         viewVideo = view.findViewById(R.id.viewVideo);
         btnDangAnh = view.findViewById(R.id.btnDangAnh);
 
-        imgAddAnh.setOnClickListener(v -> { openMediaPicker("image"); });
-        imgAddVideo.setOnClickListener(v -> { openMediaPicker("video"); });
-        btnDangAnh.setOnClickListener(v -> { dangVideo(); });
-
+        imgAddAnh.setOnClickListener(v -> {
+            openMediaPicker("image");
+        });
+        imgAddVideo.setOnClickListener(v -> {
+            openMediaPicker("video");
+        });
+        btnDangAnh.setOnClickListener(v -> {
+            dangVideo();
+        });
 
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String ngayHienTai = df.format(Calendar.getInstance().getTime());
-        ngayDang.setText("Ngày: " + ngayHienTai);
+        ngayDang.setText(ngayHienTai);
 
 
         // Tạo đối tượng AnhVideoDBhelper
@@ -109,7 +116,6 @@ public class DangVideoFragment extends Fragment {
             }
         }
     }
-
 
 
     private void openMediaPicker(String mediaType) {
@@ -153,16 +159,37 @@ public class DangVideoFragment extends Fragment {
     }
 
     private void dangVideo() {
+        // Lấy thông tin từ UI
         String ngay = ngayDang.getText().toString();
         String tieuDe = tieuDeDang.getText().toString();
+
+        // Kiểm tra xem các trường dữ liệu có bị thiếu không
         if (ngay.isEmpty() || tieuDe.isEmpty() || uriAnh == null || uriVideo == null) {
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "Đăng video thành công", Toast.LENGTH_SHORT).show();
-            Log.e("ngayDang: ", ngay);
-            Log.e("tieuDe: ", tieuDe);
-            Log.e("uriAnh: ", uriAnh);
-            Log.e("uriVideo: ", uriVideo);
+            // Tạo đối tượng AnhVideoDBhelper
+            AnhVideoDBhelper dbHelper = new AnhVideoDBhelper(getContext());
+            SQLiteDatabase db = null;
+            try {
+                // Mở cơ sở dữ liệu để có thể ghi
+                db = dbHelper.getWritableDatabase();
+
+                // Chèn dữ liệu vào cơ sở dữ liệu
+                dbHelper.insert(tieuDe, ngay, uriAnh, uriVideo);
+
+                // Thông báo và log thông tin
+                Toast.makeText(getContext(), "Đăng video thành công", Toast.LENGTH_SHORT).show();
+                Log.e("Ngày đăng: ", ngay);
+                Log.e("Tiêu đề: ", tieuDe);
+                Log.e("URL ảnh: ", uriAnh);
+                Log.e("URL video: ", uriVideo);
+            } catch (Exception e) {
+                Log.e("Database Error", "Error during inserting: " + e.getMessage());
+            } finally {
+                if (db != null && db.isOpen()) {
+                    db.close(); // Đảm bảo đóng cơ sở dữ liệu khi xong
+                }
+            }
         }
     }
 

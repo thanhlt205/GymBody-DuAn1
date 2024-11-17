@@ -1,0 +1,49 @@
+// Kiểm tra quyền và thực hiện tải ảnh
+        for (anhVideoModel video : arrayList) {
+            String imageUri = video.getAnh(); // Lấy URI của ảnh
+            checkPermissionAndLoadImage(imageUri);
+        }
+
+
+
+// Kiểm tra quyền và yêu cầu quyền nếu cần
+    private void checkPermissionAndLoadImage(String imageUri) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Nếu chưa có quyền, yêu cầu cấp quyền
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSION_REQUEST_CODE);
+        } else {
+            // Nếu đã có quyền, thực hiện tải ảnh
+            loadImageWithGlide(imageUri);
+        }
+    }
+
+    // Tải ảnh bằng Glide
+    private void loadImageWithGlide(String imageUri) {
+        // Sử dụng Glide để tải ảnh từ URI
+        Glide.with(getContext())
+                .load(imageUri)
+                .placeholder(R.drawable.edit)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(img); // Cập nhật 'yourImageView' với ImageView của bạn
+    }
+
+    // Xử lý kết quả trả về từ yêu cầu quyền
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Quyền đã được cấp, thực hiện tải ảnh
+                for (anhVideoModel video : arrayList) {
+                    String imageUri = video.getAnh(); // Lấy URI của ảnh
+                    loadImageWithGlide(imageUri);
+                }
+            } else {
+                // Quyền bị từ chối, thông báo cho người dùng
+                Toast.makeText(getContext(), "Cần quyền truy cập bộ nhớ để hiển thị ảnh", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }

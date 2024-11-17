@@ -71,15 +71,10 @@ public class TrangChuFragment extends Fragment {
         edtTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSearchFragment();
+                Toast.makeText(getContext(), "Chuyển màn tìm kiếm", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), TimKiemActivity.class));
             }
         });
         return view;
-    }
-
-    private void openSearchFragment() {
-        Toast.makeText(getContext(), "Check", Toast.LENGTH_SHORT).show();
-
-        startActivity(new Intent(getActivity(), TimKiemActivity.class));
     }
 }
