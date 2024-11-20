@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.gymbody.R;
 import com.example.gymbody.adapterVideo.AnhVideoAdapter;
 import com.example.gymbody.dao.AnhVideoDAO;
-import com.example.gymbody.model.anhVideoModel;
+import com.example.gymbody.model.AnhVideoModel;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,8 @@ public class TrangChuFragment extends Fragment {
     private EditText edtTimKiem;
     private RecyclerView recyclerView;
     private AnhVideoDAO anhVideoDAO;
-    ArrayList<anhVideoModel> arrayList = new ArrayList<>();
+    private AnhVideoAdapter adapterAnhVideo;
+    ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
 
     public TrangChuFragment() {
         // Required empty public constructor
@@ -40,6 +41,12 @@ public class TrangChuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapterAnhVideo.notifyDataSetChanged();
     }
 
     @Override
@@ -60,7 +67,7 @@ public class TrangChuFragment extends Fragment {
         }
 
         // Hiển thị dữ liệu vào RecyclerView
-        AnhVideoAdapter adapterAnhVideo = new AnhVideoAdapter(getContext(), arrayList);
+        adapterAnhVideo = new AnhVideoAdapter(getContext(), arrayList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapterAnhVideo);
@@ -76,5 +83,11 @@ public class TrangChuFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapterAnhVideo.notifyDataSetChanged();
     }
 }

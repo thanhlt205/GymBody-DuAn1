@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="@+id/imgAnhRcv"
         app:layout_constraintTop_toTopOf="@+id/imgAnhRcv" />
 
-    <ImageView
+        <ImageView
         android:id="@+id/imgYeuThichRcv"
         android:layout_width="30dp"
         android:layout_height="30dp"

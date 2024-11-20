@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,173 +10,204 @@
     android:paddingEnd="16dp"
     tools:context=".chucNang_user.CaiDatFragment">
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="@drawable/backgorund"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgAnhCaiDat"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorEdt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@drawable/backgorund"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgAddAnhCaiDat"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/edit"
-        app:layout_constraintEnd_toEndOf="@id/imgAnhCaiDat"
-        app:layout_constraintTop_toTopOf="@id/imgAnhCaiDat" />
+        <ImageView
+            android:id="@+id/imgAnhCaiDat"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_gymbody_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtNameCaiDat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Hi! thanhltph49838@gmail.com"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgAnhCaiDat" />
+        <ImageView
+            android:id="@+id/imgAddAnhCaiDat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/edit"
+            app:layout_constraintEnd_toEndOf="@id/imgAnhCaiDat"
+            app:layout_constraintTop_toTopOf="@id/imgAnhCaiDat" />
 
-    <Button
-        android:id="@+id/btnChonGiaoDien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/clorBottomCaiDat"
-        android:gravity="start|center_vertical"
-        android:padding="16dp"
-        android:paddingStart="60dp"
-        android:text="Chọn giao diện"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtNameCaiDat" />
+        <TextView
+            android:id="@+id/txtNameCaiDat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Hi! thanhltph49838@gmail.com"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgAnhCaiDat" />
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/icon_chongiaodien"
-        app:layout_constraintBottom_toBottomOf="@id/btnChonGiaoDien"
-        app:layout_constraintStart_toStartOf="@id/btnChonGiaoDien"
-        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
+        <Button
+            android:id="@+id/btnChonGiaoDien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Chọn giao diện"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtNameCaiDat" />
 
-    <Button
-        android:id="@+id/btnVideoYeuThich"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/clorBottomCaiDat"
-        android:gravity="start|center_vertical"
-        android:padding="16dp"
-        android:paddingStart="60dp"
-        android:text="Video yêu thích"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnChonGiaoDien" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_chongiaodien"
+            app:layout_constraintBottom_toBottomOf="@id/btnChonGiaoDien"
+            app:layout_constraintStart_toStartOf="@id/btnChonGiaoDien"
+            app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/icon_yeu_thich"
-        app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
-        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
-        app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
+        <Button
+            android:id="@+id/btnVideoYeuThich"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Video yêu thích"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnChonGiaoDien" />
 
-    <Button
-        android:id="@+id/btnDoiNgonNgu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/clorBottomCaiDat"
-        android:gravity="start|center_vertical"
-        android:padding="16dp"
-        android:paddingStart="60dp"
-        android:text="Đổi ngôn ngữ"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnVideoYeuThich" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_yeu_thich"
+            app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
+            app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
+            app:layout_constraintTop_toTopOf="@id/btnChonGiaoDien" />
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/icon_doingongu"
-        app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
-        app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
-        app:layout_constraintTop_toTopOf="@id/btnDoiNgonNgu" />
+        <Button
+            android:id="@+id/btnDoiNgonNgu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Đổi ngôn ngữ"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnVideoYeuThich" />
 
-    <Button
-        android:id="@+id/btnThongBao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/clorBottomCaiDat"
-        android:gravity="start|center_vertical"
-        android:padding="16dp"
-        android:paddingStart="60dp"
-        android:text="Thông báo"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnDoiNgonNgu" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_doingongu"
+            app:layout_constraintBottom_toBottomOf="@id/btnDoiNgonNgu"
+            app:layout_constraintStart_toStartOf="@id/btnDoiNgonNgu"
+            app:layout_constraintTop_toTopOf="@id/btnDoiNgonNgu" />
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/icon_thongbao"
-        app:layout_constraintBottom_toBottomOf="@id/btnThongBao"
-        app:layout_constraintStart_toStartOf="@id/btnThongBao"
-        app:layout_constraintTop_toTopOf="@id/btnThongBao" />
+        <Button
+            android:id="@+id/btnThongBao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Thông báo"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDoiNgonNgu" />
 
-    <Button
-        android:id="@+id/btnDangXuat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/clorBottomCaiDat"
-        android:gravity="start|center_vertical"
-        android:padding="16dp"
-        android:paddingStart="60dp"
-        android:text="Đăng xuất"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnThongBao" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_thongbao"
+            app:layout_constraintBottom_toBottomOf="@id/btnThongBao"
+            app:layout_constraintStart_toStartOf="@id/btnThongBao"
+            app:layout_constraintTop_toTopOf="@id/btnThongBao" />
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/icon_dang_xuat"
-        app:layout_constraintBottom_toBottomOf="@id/btnDangXuat"
-        app:layout_constraintStart_toStartOf="@id/btnDangXuat"
-        app:layout_constraintTop_toTopOf="@id/btnDangXuat" />
+        <Button
+            android:id="@+id/btnDangXuat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Đăng xuất"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnThongBao" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_dang_xuat"
+            app:layout_constraintBottom_toBottomOf="@id/btnDangXuat"
+            app:layout_constraintStart_toStartOf="@id/btnDangXuat"
+            app:layout_constraintTop_toTopOf="@id/btnDangXuat" />
+        <Button
+            android:id="@+id/btnTkDaDk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/clorBottomCaiDat"
+            android:gravity="start|center_vertical"
+            android:padding="16dp"
+            android:paddingStart="60dp"
+            android:text="Tài khoản đã đăng ký"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDangXuat" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_acount"
+            app:layout_constraintBottom_toBottomOf="@id/btnTkDaDk"
+            app:layout_constraintStart_toStartOf="@id/btnTkDaDk"
+            app:layout_constraintTop_toTopOf="@id/btnTkDaDk" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

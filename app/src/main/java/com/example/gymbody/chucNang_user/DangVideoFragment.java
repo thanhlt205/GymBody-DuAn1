@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +29,6 @@ import com.example.gymbody.dbHelperVideo.AnhVideoDBhelper;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class DangVideoFragment extends Fragment {
 
@@ -179,10 +176,10 @@ public class DangVideoFragment extends Fragment {
 
                 // Thông báo và log thông tin
                 Toast.makeText(getContext(), "Đăng video thành công", Toast.LENGTH_SHORT).show();
-                Log.e("Ngày đăng: ", ngay);
-                Log.e("Tiêu đề: ", tieuDe);
-                Log.e("URL ảnh: ", uriAnh);
-                Log.e("URL video: ", uriVideo);
+                ngayDang.setText("");
+                tieuDeDang.setText("");
+                uriAnh = null;
+                uriVideo = null;
             } catch (Exception e) {
                 Log.e("Database Error", "Error during inserting: " + e.getMessage());
             } finally {
@@ -192,11 +189,4 @@ public class DangVideoFragment extends Fragment {
             }
         }
     }
-
-    //    // Phương thức mở bộ chọn video
-//    private void openVideoPicker() {
-//        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-//        intent.setType("video/*");
-//        startActivityForResult(intent, REQUEST_CODE_PICK_VIDEO);
-//    }
 }

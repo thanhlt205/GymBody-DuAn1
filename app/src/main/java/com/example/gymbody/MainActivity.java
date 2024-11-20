@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         buttonNavigation.getMenu().findItem(R.id.iconDangVideo).setChecked(true);
                         break;
                     case 2:
-                        buttonNavigation.getMenu().findItem(R.id.iconChat).setChecked(true);
+                        buttonNavigation.getMenu().findItem(R.id.iconGioHang).setChecked(true);
                         break;
                     case 3:
                         buttonNavigation.getMenu().findItem(R.id.iconCaiDat).setChecked(true);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.iconDangVideo) {
                     viewPager.setCurrentItem(1);
                 }
-                if (itemId == R.id.iconChat) {
+                if (itemId == R.id.iconGioHang) {
                     viewPager.setCurrentItem(2);
                 }
                 if (itemId == R.id.iconCaiDat) {

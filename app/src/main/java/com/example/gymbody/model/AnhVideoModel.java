@@ -1,16 +1,16 @@
 package com.example.gymbody.model;
 
-public class anhVideoModel {
+public class AnhVideoModel {
     private int id;
     private String ten;
     private String ngay;
     private String anh;
     private String video;
 
-    public anhVideoModel() {
+    public AnhVideoModel() {
     }
 
-    public anhVideoModel(int id, String ten, String ngay, String anh) {
+    public AnhVideoModel(int id, String ten, String ngay, String anh) {
         this.id = id;
         this.ten = ten;
         this.ngay = ngay;

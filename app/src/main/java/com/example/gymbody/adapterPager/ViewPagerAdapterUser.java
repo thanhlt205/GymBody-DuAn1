@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.gymbody.chucNang_user.CaiDatFragment;
-import com.example.gymbody.chucNang_user.ChatFragment;
+import com.example.gymbody.chucNang_user.GioHangFragment;
 import com.example.gymbody.chucNang_user.DangVideoFragment;
 import com.example.gymbody.chucNang_user.TrangChuFragment;
 
@@ -25,7 +25,7 @@ public class ViewPagerAdapterUser extends FragmentPagerAdapter {
             case 1:
                 return new DangVideoFragment();
             case 2:
-                return new ChatFragment();
+                return new GioHangFragment();
             case 3:
                 return new CaiDatFragment();
             default:

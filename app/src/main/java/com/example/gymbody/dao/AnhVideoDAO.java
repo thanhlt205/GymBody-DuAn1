@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.gymbody.dbHelperVideo.AnhVideoDBhelper;
-import com.example.gymbody.model.anhVideoModel;
+import com.example.gymbody.model.AnhVideoModel;
 
 import java.util.ArrayList;
 
@@ -20,15 +20,15 @@ public class AnhVideoDAO {
     }
 
     // lấy tất cả dữ liệu trong bảng
-    public ArrayList<anhVideoModel> getAll() {
-        ArrayList<anhVideoModel> arrayList = new ArrayList<>();
+    public ArrayList<AnhVideoModel> getAll() {
+        ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
         String sql = "select * from AnhVideo";
         Cursor cursor = null;
         try {
             cursor = db.rawQuery(sql, null);
             if (cursor.moveToFirst()) {
                 do {
-                anhVideoModel anhVideoModel = new anhVideoModel();
+                AnhVideoModel anhVideoModel = new AnhVideoModel();
                 anhVideoModel.setId(cursor.getInt(0));
                 anhVideoModel.setTen(cursor.getString(1));
                 anhVideoModel.setNgay(cursor.getString(2));

@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.gymbody.R;
 
-public class ChatFragment extends Fragment {
-    public ChatFragment() {
+public class GioHangFragment extends Fragment {
+    public GioHangFragment() {
         // Required empty public constructor
     }
-    public static ChatFragment newInstance() {
-        ChatFragment fragment = new ChatFragment();
+    public static GioHangFragment newInstance() {
+        GioHangFragment fragment = new GioHangFragment();
         return fragment;
     }
 
@@ -28,6 +28,6 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        return inflater.inflate(R.layout.fragment_gio_hang, container, false);
     }
 }

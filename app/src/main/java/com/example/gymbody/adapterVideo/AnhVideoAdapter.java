@@ -16,16 +16,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.gymbody.R;
 import com.example.gymbody.chucNang_user.ShowVideoActivity;
-import com.example.gymbody.model.anhVideoModel;
+import com.example.gymbody.model.AnhVideoModel;
 
 import java.util.ArrayList;
 
 public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<anhVideoModel> arrayList;
+    ArrayList<AnhVideoModel> arrayList;
 
-    public AnhVideoAdapter(Context context, ArrayList<anhVideoModel> arrayList) {
+    public AnhVideoAdapter(Context context, ArrayList<AnhVideoModel> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -39,7 +39,7 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull AnhVideoAdapter.ViewHolder holder, int position) {
-        anhVideoModel model = arrayList.get(position);
+        AnhVideoModel model = arrayList.get(position);
 
         holder.txtTieuDeRcv.setText(model.getTen());
         holder.txtNgayRcv.setText("Ngày đăng: " + model.getNgay());

@@ -1,7 +1,5 @@
 package com.example.gymbody.chucNang_user;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gymbody.R;
 import com.example.gymbody.adapterVideo.AnhVideoAdapter;
 import com.example.gymbody.dao.AnhVideoDAO;
-import com.example.gymbody.model.anhVideoModel;
+import com.example.gymbody.model.AnhVideoModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,8 +30,8 @@ public class TimKiemActivity extends AppCompatActivity implements Filterable {
 
     private RecyclerView recyclerView;
     private AnhVideoDAO anhVideoDAO;
-    ArrayList<anhVideoModel> arrayList = new ArrayList<>();
-    ArrayList<anhVideoModel> filteredList ;
+    ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
+    ArrayList<AnhVideoModel> filteredList ;
     TextInputEditText edtSearch;
     TextInputLayout tipTimKIem;
     @Override
@@ -91,13 +89,13 @@ public class TimKiemActivity extends AppCompatActivity implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 FilterResults filterResults = new FilterResults();
-                List<anhVideoModel> filteredList = new ArrayList<>();
+                List<AnhVideoModel> filteredList = new ArrayList<>();
                 if (charSequence == null || charSequence.length() == 0) {
                     filteredList.addAll(arrayList);
                 } else {
                     String filterPattern = charSequence.toString().toLowerCase().trim();
                     Log.e("filterPattern", "filterPattern: "+filterPattern );
-                    for (anhVideoModel item : arrayList) {
+                    for (AnhVideoModel item : arrayList) {
                         Log.e("item.getTen()", "item.getTen(): "+item.getTen() );
                         Log.e("item", "item: "+item );
                         if (item.getTen().toLowerCase().contains(filterPattern)) {
@@ -114,7 +112,7 @@ public class TimKiemActivity extends AppCompatActivity implements Filterable {
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 if (filterResults.values != null) {
                     filteredList.clear();
-                    filteredList.addAll((List<anhVideoModel>) filterResults.values);
+                    filteredList.addAll((List<AnhVideoModel>) filterResults.values);
                     if (recyclerView.getAdapter() != null) {
                         recyclerView.getAdapter().notifyDataSetChanged();
                     }

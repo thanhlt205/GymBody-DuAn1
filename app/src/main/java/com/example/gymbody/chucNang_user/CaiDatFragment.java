@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.gymbody.Login;
 import com.example.gymbody.R;
+import com.example.gymbody.chucNang_admin.ShowAcountActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -25,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class CaiDatFragment extends Fragment {
 
     TextView txtNameCaiDat;
-    Button btnChonGiaoDien, btnVideoYeuThich, btnDoiNgonNgu, btnThongBao, btnDangXuat;
+    Button btnChonGiaoDien, btnVideoYeuThich, btnDoiNgonNgu, btnThongBao, btnDangXuat, btnTkDaDk;
     private FirebaseAuth mAuth;
 
     public CaiDatFragment() {
@@ -55,6 +56,7 @@ public class CaiDatFragment extends Fragment {
         btnDoiNgonNgu = view.findViewById(R.id.btnDoiNgonNgu);
         btnThongBao = view.findViewById(R.id.btnThongBao);
         btnDangXuat = view.findViewById(R.id.btnDangXuat);
+        btnTkDaDk = view.findViewById(R.id.btnTkDaDk);
 
         String email = mAuth.getCurrentUser().getEmail();
         txtNameCaiDat.setText("Hi! "+email);
@@ -86,6 +88,9 @@ public class CaiDatFragment extends Fragment {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
+        });
+        btnTkDaDk.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), ShowAcountActivity.class));
         });
         return view;
     }

@@ -11,9 +11,9 @@
         android:title="Đăng Video"/>
 
     <item
-        android:id="@+id/iconChat"
-        android:icon="@drawable/icon_chat"
-        android:title="Chat"/>
+        android:id="@+id/iconGioHang"
+        android:icon="@drawable/icon_giohang"
+        android:title="Giỏ hàng"/>
 
     <item
         android:id="@+id/iconCaiDat"
