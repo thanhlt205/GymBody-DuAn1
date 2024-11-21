@@ -1,7 +1,9 @@
 package com.example.gymbody;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class Login extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
+
     private TextView txtResetPassword, txtRegister;
     private FirebaseAuth mAuth;
 
@@ -52,20 +55,44 @@ public class Login extends AppCompatActivity {
         txtResetPassword = findViewById(R.id.txtResetPassword);
         txtRegister = findViewById(R.id.txtRegister);
 
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        SharedPreferences preferences = getSharedPreferences("USER_PREF", MODE_PRIVATE);
+        boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);  // False là giá trị mặc định
+
+        // Nếu đã đăng nhập, chuyển đến màn hình chính
+        if (isLoggedIn) {
+            // Người dùng đã đăng nhập trước đó, chuyển đến MainActivity
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();  // Đóng LoginActivity
+            return;  // Dừng lại, không thực hiện thêm bước đăng nhập nữa
+        }
         btnLogin.setOnClickListener(view -> {
             if (edtEmail.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()) {
                 Toast.makeText(Login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                return;
             } else {
                 mAuth.signInWithEmailAndPassword(edtEmail.getText().toString().trim(), edtPassword.getText().toString().trim())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-//                                    SharedPreferences
-                                    startActivity(new Intent(Login.this, MainActivity.class));
-                                    finish();
+                                    // Lưu trạng thái đăng nhập vào SharedPreferences
+                                    SharedPreferences preferences = getSharedPreferences("USER_PREF", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putBoolean("isLoggedIn", true);  // Đánh dấu người dùng đã đăng nhập
+                                    editor.apply();
+
+                                    // Chuyển đến màn hình chính
+                                    String getEmailEdt = edtEmail.getText().toString().trim();
+                                    if (getEmailEdt.equals("admin@gmail.com")) {
+                                        startActivity(new Intent(Login.this, MainActivity.class));
+                                        Toast.makeText(Login.this, "Đăng nhập thành công admin", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        startActivity(new Intent(Login.this, MainActivity.class));
+                                        Toast.makeText(Login.this, "Đăng nhập thành công user", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+
                                 } else {
                                     Toast.makeText(Login.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                                 }

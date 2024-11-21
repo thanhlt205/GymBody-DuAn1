@@ -28,6 +28,6 @@ public class Manhinhchao extends AppCompatActivity {
             Intent intent = new Intent(Manhinhchao.this, Login.class);
             startActivity(intent);
             finish();
-        }, 5000);
+        }, 3000);
     }
 }
