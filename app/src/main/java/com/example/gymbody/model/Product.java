@@ -5,13 +5,15 @@ public class Product {
     private String name;      // Tên sản phẩm
     private double price;     // Giá sản phẩm
     private String image;     // URL hoặc đường dẫn hình ảnh sản phẩm
+    private String description; // Mô tả sản phẩm
 
     // Constructor
-    public Product(int id, String name, double price, String image) {
+    public Product(int id, String name, double price, String image, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.description = description;
     }
 
     // Getter và Setter
@@ -47,6 +49,14 @@ public class Product {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     // (Optional) ToString để in thông tin sản phẩm ra log
     @Override
     public String toString() {
@@ -55,7 +65,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
-

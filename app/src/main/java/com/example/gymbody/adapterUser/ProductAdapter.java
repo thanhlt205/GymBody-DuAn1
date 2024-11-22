@@ -1,4 +1,4 @@
-package com.example.gymbody.adapter;
+package com.example.gymbody.adapterUser;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +47,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         // Sử dụng Glide để load hình ảnh sản phẩm
         Glide.with(holder.itemView.getContext())
                 .load(product.getImage())  // Đảm bảo product.getImage() là URL hoặc resource hợp lệ
+                .placeholder(R.drawable.edit)  // Thêm placeholder (hình ảnh thay thế khi tải)
+                .error(R.drawable.ic_launcher_background)  // Thêm hình ảnh lỗi khi tải không thành công
                 .into(holder.imageView);
 
         // Xử lý sự kiện click
@@ -59,12 +61,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public int getItemCount() {
-        return productList.size();  // Trả về số lượng sản phẩm trong danh sách
+        if (productList != null) {
+            return productList.size();  // Trả về số lượng sản phẩm trong danh sách
+        }
+        return 0;
     }
 
     // ViewHolder để ánh xạ các view trong item
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView, priceTextView;
+        TextView nameTextView, priceTextView, descriptionTextView;
         ImageView imageView;
 
         public ProductViewHolder(@NonNull View itemView) {

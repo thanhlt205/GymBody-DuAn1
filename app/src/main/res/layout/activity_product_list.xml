@@ -1,24 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:context=".chucNang_user.GioHangFragment">
 
-    <!-- Thanh tìm kiếm sản phẩm -->
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_edittext_background"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:hint="Tìm kiếm sản phẩm..."
-        android:padding="8dp"
-        android:textColor="@color/black" />
+<!--    &lt;!&ndash; Thanh tìm kiếm sản phẩm &ndash;&gt;-->
+<!--    <EditText-->
+<!--        android:id="@+id/searchEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/search_edittext_background"-->
+<!--        android:drawableStart="@android:drawable/ic_menu_search"-->
+<!--        android:hint="Tìm kiếm sản phẩm..."-->
+<!--        android:padding="8dp"-->
+<!--        android:textColor="@color/black" />-->
 
-    <!-- RecyclerView để hiển thị danh sách sản phẩm -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="8dp" />
+<!--    &lt;!&ndash; RecyclerView để hiển thị danh sách sản phẩm &ndash;&gt;-->
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/productRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:paddingTop="8dp" />-->
 </LinearLayout>
