@@ -3,7 +3,6 @@ package com.example.gymbody;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -81,7 +80,6 @@ public class Login extends AppCompatActivity {
                                     editor.putBoolean("isLoggedIn", true);  // Đánh dấu người dùng đã đăng nhập
                                     editor.apply();
 
-                                    // Chuyển đến màn hình chính
                                     String getEmailEdt = edtEmail.getText().toString().trim();
                                     if (getEmailEdt.equals("admin@gmail.com")) {
                                         startActivity(new Intent(Login.this, MainActivity.class));

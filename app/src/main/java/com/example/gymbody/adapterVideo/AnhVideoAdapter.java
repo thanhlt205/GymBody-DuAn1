@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.gymbody.R;
 import com.example.gymbody.chucNang_user.ShowVideoActivity;
+import com.example.gymbody.dbHelper.AnhVideoDBhelper;
 import com.example.gymbody.model.AnhVideoModel;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
     @NonNull
     @Override
     public AnhVideoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_rcv, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_video, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,7 +48,7 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
 
         // Lấy đường dẫn ảnh từ model và tải nó vào ImageView
         String imageUrl = model.getAnh();
-        Log.e("TAG", "Image URL: " + imageUrl);  // Kiểm tra đường dẫn ảnh trong log
+        Log.e("TAG", "Image URL: " + imageUrl);
 
         // Sử dụng Glide để tải ảnh vào ImageView
         Glide.with(context)
@@ -62,6 +64,17 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
             intent.putExtra("id", String.valueOf(model.getId()));
             context.startActivity(intent);
             Log.e("ID", "ID của video: " + model.getId());
+        });
+
+        holder.imgYeuThichRcv.setOnClickListener(v -> {
+            holder.imgYeuThichRcv.setVisibility(View.GONE);
+            holder.imgYeuThichRcv.setEnabled(false);
+            Toast.makeText(context, "Thêm video yêu thích thành công", Toast.LENGTH_SHORT).show();
+
+            //thêm vào danh sách yêu thích
+            int videoId = arrayList.get(holder.getAdapterPosition()).getId();
+            AnhVideoDBhelper dbHelper = new AnhVideoDBhelper(context);
+            dbHelper.addVideoToFavorites(videoId);
         });
     }
 

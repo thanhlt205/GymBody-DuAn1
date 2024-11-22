@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.gymbody.dbHelperVideo.AnhVideoDBhelper;
+import com.example.gymbody.dbHelper.AnhVideoDBhelper;
 import com.example.gymbody.model.AnhVideoModel;
 
 import java.util.ArrayList;

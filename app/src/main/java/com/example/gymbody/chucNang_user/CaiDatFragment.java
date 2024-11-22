@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class CaiDatFragment extends Fragment {
 
     TextView txtNameCaiDat;
-    Button btnChonGiaoDien, btnVideoYeuThich, btnDoiNgonNgu, btnThongBao, btnDangXuat, btnTkDaDk;
+    Button btnDonHang, btnVideoYeuThich, btnDiaChi, btnThongBao, btnDangXuat, btnTkDaDk;
     private ConstraintLayout constraintTkDaDk;
     private FirebaseAuth mAuth;
 
@@ -55,9 +55,9 @@ public class CaiDatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cai_dat, container, false);
         txtNameCaiDat = view.findViewById(R.id.txtNameCaiDat);
-        btnChonGiaoDien = view.findViewById(R.id.btnChonGiaoDien);
+        btnDonHang = view.findViewById(R.id.btnDonHang);
         btnVideoYeuThich = view.findViewById(R.id.btnVideoYeuThich);
-        btnDoiNgonNgu = view.findViewById(R.id.btnDoiNgonNgu);
+        btnDiaChi = view.findViewById(R.id.btnDiaChi);
         btnThongBao = view.findViewById(R.id.btnThongBao);
         btnDangXuat = view.findViewById(R.id.btnDangXuat);
         btnTkDaDk = view.findViewById(R.id.btnTkDaDk);
@@ -66,14 +66,14 @@ public class CaiDatFragment extends Fragment {
         String email = mAuth.getCurrentUser().getEmail().trim();
         txtNameCaiDat.setText("Hi! " + email);
 
-        btnChonGiaoDien.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        btnDonHang.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), DonHangActivity.class));
         });
         btnVideoYeuThich.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), ShowVideoYeuThichActivity.class));
         });
-        btnDoiNgonNgu.setOnClickListener(v -> {
-            Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();
+        btnDiaChi.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), DiaChiActivity.class));
         });
         btnThongBao.setOnClickListener(v -> {
             Toast.makeText(getActivity(), "Xin lỗi! Chức năng đang được sử lý", Toast.LENGTH_SHORT).show();

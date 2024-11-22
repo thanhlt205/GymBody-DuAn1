@@ -61,7 +61,6 @@ public class ShowAcountActivity extends AppCompatActivity {
     }
 
     private void fetchAccountsFromFirestore() {
-        Toast.makeText(this, "....................", Toast.LENGTH_SHORT).show();
         db.collection("users")  // "users" là tên collection chứa thông tin tài khoản người dùng
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
@@ -75,6 +74,8 @@ public class ShowAcountActivity extends AppCompatActivity {
                             accountList.add(account);  // Thêm vào danh sách tài khoản
                             Log.e("TAG", "fetchAccountsFromFirestore: "+ account.getEmail() );
                             Log.e("TAG", "fetchAccountsFromFirestore: "+ accountList.size() );
+                        } else {
+                            Log.e("TAGGGGGGGGGG", "size firebase: "+ accountList.size());
                         }
                     }
 

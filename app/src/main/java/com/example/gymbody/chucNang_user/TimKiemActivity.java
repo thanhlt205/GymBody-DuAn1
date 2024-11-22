@@ -53,7 +53,6 @@ public class TimKiemActivity extends AppCompatActivity implements Filterable {
         arrayList = anhVideoDAO.getAll();
         Log.e("DEBUG", "Size of arrayList: " + arrayList.size());
         filteredList = new ArrayList<>(arrayList);
-        // Lấy dữ liệu từ cơ sở dữ liệu
         // Hiển thị dữ liệu vào RecyclerView
         AnhVideoAdapter adapterAnhVideo = new AnhVideoAdapter(this, filteredList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);

@@ -24,7 +24,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.gymbody.R;
-import com.example.gymbody.dbHelperVideo.AnhVideoDBhelper;
+import com.example.gymbody.dbHelper.AnhVideoDBhelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

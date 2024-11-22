@@ -18,16 +18,95 @@
         <VideoView
             android:id="@+id/viewVideoShow"
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imgPlayVideo"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/icon_pause"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/videoFrame"
+        app:layout_constraintEnd_toEndOf="@id/videoFrame"
+        app:layout_constraintStart_toStartOf="@id/videoFrame"
+        app:layout_constraintTop_toTopOf="@id/videoFrame" />
+
+    <SeekBar
+        android:id="@+id/seekBarVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/videoFrame"
+        app:layout_constraintEnd_toEndOf="@id/videoFrame"
+        app:layout_constraintStart_toStartOf="@id/videoFrame" />
+
+    <LinearLayout
+        android:id="@+id/thoiGian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarVideo"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/thoiGianChayVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/thoiGianVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgScreenQuayVideo"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/screen"
+        app:layout_constraintBottom_toBottomOf="@id/videoFrame"
+        app:layout_constraintEnd_toEndOf="@id/videoFrame" />
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/txtTenVideo"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Check bài"-->
+    <!--            android:textSize="25dp"-->
+    <!--            android:textStyle="bold"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/videoFrame" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/videoFrame" />
