@@ -7,4 +7,8 @@
     <color name="colorBottom">#68b7c1</color>
     <color name="colorEdt">#909179</color>
     <color name="clorBottomCaiDat">#F2F2D7</color>
+    <color name="primary_color">#FF5722</color> <!-- Màu chính -->
+    <color name="green">#4CAF50</color> <!-- Màu xanh giá tiền -->
+    <color name="light_gray">#DDDDDD</color> <!-- Màu viền -->
+
 </resources>
