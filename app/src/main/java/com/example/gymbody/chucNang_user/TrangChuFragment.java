@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class TrangChuFragment extends Fragment {
     private EditText edtTimKiem;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private AnhVideoDAO anhVideoDAO;
     private AnhVideoAdapter adapterAnhVideo;
     ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
@@ -55,6 +57,7 @@ public class TrangChuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_trang_chu, container, false);
         edtTimKiem = view.findViewById(R.id.edtTimKiem);
         recyclerView = view.findViewById(R.id.recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         anhVideoDAO = new AnhVideoDAO(getContext());
 
@@ -82,7 +85,14 @@ public class TrangChuFragment extends Fragment {
                 startActivity(new Intent(getActivity(), TimKiemActivity.class));
             }
         });
+        swipeRefreshLayout.setOnRefreshListener( () -> {
+            arrayList.clear();
+            arrayList.addAll(anhVideoDAO.getAll());
+            adapterAnhVideo.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+        });
         return view;
+
     }
 
     @Override

@@ -176,10 +176,7 @@ public class DangVideoFragment extends Fragment {
 
                 // Thông báo và log thông tin
                 Toast.makeText(getContext(), "Đăng video thành công", Toast.LENGTH_SHORT).show();
-                ngayDang.setText("");
-                tieuDeDang.setText("");
-                uriAnh = null;
-                uriVideo = null;
+                viewVideo.stopPlayback(); // Dừng phát video
             } catch (Exception e) {
                 Log.e("Database Error", "Error during inserting: " + e.getMessage());
             } finally {

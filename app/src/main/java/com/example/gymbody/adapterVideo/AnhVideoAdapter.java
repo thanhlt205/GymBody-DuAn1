@@ -1,5 +1,7 @@
 package com.example.gymbody.adapterVideo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.gymbody.R;
 import com.example.gymbody.chucNang_user.ShowVideoActivity;
+import com.example.gymbody.dao.AnhVideoDAO;
 import com.example.gymbody.dbHelper.AnhVideoDBhelper;
 import com.example.gymbody.model.AnhVideoModel;
 
@@ -48,7 +51,6 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
 
         // Lấy đường dẫn ảnh từ model và tải nó vào ImageView
         String imageUrl = model.getAnh();
-        Log.e("TAG", "Image URL: " + imageUrl);
 
         // Sử dụng Glide để tải ảnh vào ImageView
         Glide.with(context)
@@ -76,24 +78,42 @@ public class AnhVideoAdapter extends RecyclerView.Adapter<AnhVideoAdapter.ViewHo
             AnhVideoDBhelper dbHelper = new AnhVideoDBhelper(context);
             dbHelper.addVideoToFavorites(videoId);
         });
-    }
 
-    @Override
-    public int getItemCount() {
-        // Trả về số lượng phần tử trong danh sách
-        return arrayList != null ? arrayList.size() : 0;
-    }
+        holder.itemView.setOnLongClickListener(view -> {
+            String id = String.valueOf(model.getId());
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(true);
+            builder.setTitle("Thông báo");
+            builder.setMessage("Bạn có chắc chắn muốn xóa?");
+            builder.setPositiveButton("Có", (dialog, which) -> {
+                AnhVideoDAO anhVideoDAO = new AnhVideoDAO(context);
+                anhVideoDAO.deleteById(Integer.parseInt(id));
+                Toast.makeText(context, "Xóa video thành công", Toast.LENGTH_SHORT).show();
+            });
+            builder.setNegativeButton("Không", (dialog, which) -> {
+                Toast.makeText(context, "Hủy xóa video", Toast.LENGTH_SHORT).show();
+            });
+            builder.show();
+                return false;
+            });
+        }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTieuDeRcv, txtNgayRcv;
-        ImageView imgYeuThichRcv, imgAnhRcv;
+        @Override
+        public int getItemCount () {
+            // Trả về số lượng phần tử trong danh sách
+            return arrayList != null ? arrayList.size() : 0;
+        }
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtTieuDeRcv = itemView.findViewById(R.id.txtTieuDeRcv);
-            txtNgayRcv = itemView.findViewById(R.id.txtNgayRcv);
-            imgYeuThichRcv = itemView.findViewById(R.id.imgYeuThichRcv);
-            imgAnhRcv = itemView.findViewById(R.id.imgAnhRcv);
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            TextView txtTieuDeRcv, txtNgayRcv;
+            ImageView imgYeuThichRcv, imgAnhRcv;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                txtTieuDeRcv = itemView.findViewById(R.id.txtTieuDeRcv);
+                txtNgayRcv = itemView.findViewById(R.id.txtNgayRcv);
+                imgYeuThichRcv = itemView.findViewById(R.id.imgYeuThichRcv);
+                imgAnhRcv = itemView.findViewById(R.id.imgAnhRcv);
+            }
         }
     }
-}

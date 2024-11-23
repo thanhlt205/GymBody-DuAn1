@@ -42,4 +42,34 @@ public class AnhVideoDAO {
         }
         return arrayList;
     }
+
+    // Hàm xóa dữ liệu theo id
+    public void deleteById(int id) {
+        try {
+            // Xóa dữ liệu khỏi bảng AnhVideo dựa vào id
+            int rowsDeleted = db.delete("AnhVideo", "id = ?", new String[]{String.valueOf(id)});
+            if (rowsDeleted > 0) {
+                Log.d("AnhVideoDAO", "Xóa thành công AnhVideo với id: " + id);
+            } else {
+                Log.d("AnhVideoDAO", "Không tìm thấy AnhVideo với id: " + id);
+            }
+        } catch (Exception e) {
+            Log.e("AnhVideoDAO", "Lỗi khi xóa dữ liệu từ cơ sở dữ liệu", e);
+        }
+    }
+
+    public void deleteFavoriteById(int videoId) {
+        try {
+            // Xóa video yêu thích từ bảng favorite_videos theo video_id
+            int rowsDeleted = db.delete("favorite_videos", "video_id = ?", new String[]{String.valueOf(videoId)});
+
+            if (rowsDeleted > 0) {
+                Log.d("FavoriteVideosDAO", "Xóa thành công video yêu thích với video_id: " + videoId);
+            } else {
+                Log.d("FavoriteVideosDAO", "Không tìm thấy video yêu thích với video_id: " + videoId);
+            }
+        } catch (Exception e) {
+            Log.e("FavoriteVideosDAO", "Lỗi khi xóa video yêu thích", e);
+        }
+    }
 }

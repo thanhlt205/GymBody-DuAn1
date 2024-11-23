@@ -1,5 +1,6 @@
 package com.example.gymbody.adapterVideo;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.gymbody.R;
 import com.example.gymbody.chucNang_user.ShowVideoActivity;
+import com.example.gymbody.dao.AnhVideoDAO;
 import com.example.gymbody.model.AnhVideoModel;
 import com.example.gymbody.model.VideoFavoriteModel;
 
@@ -57,6 +60,24 @@ public class VideoYeuThichAdapter extends RecyclerView.Adapter<VideoYeuThichAdap
             intent.putExtra("id", String.valueOf(videoFavirite.getId()));
             context.startActivity(intent);
             Log.e("ID", "ID của video: " + videoFavirite.getId());
+        });
+
+        holder.itemView.setOnLongClickListener(view -> {
+            String id = String.valueOf(videoFavirite.getId());
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(true);
+            builder.setTitle("Thông báo");
+            builder.setMessage("Bạn có chắc chắn muốn xóa?");
+            builder.setPositiveButton("Có", (dialog, which) -> {
+                AnhVideoDAO anhVideoDAO = new AnhVideoDAO(context);
+                anhVideoDAO.deleteFavoriteById(Integer.parseInt(id));
+                Toast.makeText(context, "Xóa video thành công", Toast.LENGTH_SHORT).show();
+            });
+            builder.setNegativeButton("Không", (dialog, which) -> {
+                Toast.makeText(context, "Hủy xóa video", Toast.LENGTH_SHORT).show();
+            });
+            builder.show();
+            return false;
         });
 
     }

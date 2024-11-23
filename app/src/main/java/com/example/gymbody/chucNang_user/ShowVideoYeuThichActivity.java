@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.gymbody.R;
 import com.example.gymbody.adapterVideo.VideoYeuThichAdapter;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ShowVideoYeuThichActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private VideoYeuThichAdapter adapter;
     private AnhVideoDBhelper dbHelper;
     List<VideoFavoriteModel> favoriteVideos;
@@ -35,6 +37,7 @@ public class ShowVideoYeuThichActivity extends AppCompatActivity {
             return insets;
         });
         recyclerView = findViewById(R.id.rcvVideoYeuThich);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         dbHelper = new AnhVideoDBhelper(this);
@@ -43,6 +46,13 @@ public class ShowVideoYeuThichActivity extends AppCompatActivity {
         // Gán Adapter
         adapter = new VideoYeuThichAdapter(this, favoriteVideos);
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            favoriteVideos.clear();
+            favoriteVideos.addAll(dbHelper.getFavoriteVideoDetails());
+            adapter.notifyDataSetChanged();
+           swipeRefreshLayout.setRefreshing(false);
+        });
 
     }
 }
