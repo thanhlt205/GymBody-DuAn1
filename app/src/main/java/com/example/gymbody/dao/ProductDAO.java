@@ -15,6 +15,7 @@ public class ProductDAO {
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
 
+    // Constructor
     public ProductDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
@@ -45,41 +46,61 @@ public class ProductDAO {
     // 3. Lấy tất cả các sản phẩm
     public List<Product> getAllProducts() {
         List<Product> productList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT id, name, price, image, description FROM Products", null);  // Lấy cột description
+        Cursor cursor = null;
 
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            double price = cursor.getDouble(2);
-            String image = cursor.getString(3);
-            String description = cursor.getString(4);  // Lấy cột description
+        try {
+            cursor = db.rawQuery("SELECT id, name, price, image, description FROM Products", null);  // Lấy cột description
 
-            productList.add(new Product(id, name, price, image, description));  // Thêm description
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                double price = cursor.getDouble(2);
+                String image = cursor.getString(3);
+                String description = cursor.getString(4);  // Lấy cột description
+
+                productList.add(new Product(id, name, price, image, description));  // Thêm description
+            }
+        } finally {
+            if (cursor != null) cursor.close(); // Đóng Cursor
         }
-        cursor.close();
+
         return productList;
     }
 
     // 4. Lấy sản phẩm theo ID
     public Product getProductById(int productId) {
         Product product = null;
-        Cursor cursor = db.rawQuery("SELECT id, name, price, image, description FROM Products WHERE id = ?", new String[]{String.valueOf(productId)});
+        Cursor cursor = null;
 
-        if (cursor.moveToFirst()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            double price = cursor.getDouble(2);
-            String image = cursor.getString(3);
-            String description = cursor.getString(4);  // Lấy cột description
+        try {
+            cursor = db.rawQuery("SELECT id, name, price, image, description FROM Products WHERE id = ?", new String[]{String.valueOf(productId)});
 
-            product = new Product(id, name, price, image, description);  // Thêm description vào constructor
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                double price = cursor.getDouble(2);
+                String image = cursor.getString(3);
+                String description = cursor.getString(4);  // Lấy cột description
+
+                product = new Product(id, name, price, image, description);  // Thêm description vào constructor
+            }
+        } finally {
+            if (cursor != null) cursor.close(); // Đóng Cursor
         }
-        cursor.close();
+
         return product;
     }
 
     // 5. Xóa sản phẩm theo ID
-    public void deleteProduct(int productId) {
-        db.delete("Products", "id = ?", new String[]{String.valueOf(productId)});
+    public void deleteProduct(Product product) {
+        // Xóa sản phẩm khỏi bảng "Products"
+        db.delete("Products", "id = ?", new String[]{String.valueOf(product.getId())});
+    }
+
+    // Đóng kết nối cơ sở dữ liệu
+    public void close() {
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
     }
 }

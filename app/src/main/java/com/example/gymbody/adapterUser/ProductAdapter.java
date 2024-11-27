@@ -1,8 +1,11 @@
 package com.example.gymbody.adapterUser;
 
+import static java.lang.System.load;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,15 +16,20 @@ import com.bumptech.glide.Glide;
 import com.example.gymbody.R;
 import com.example.gymbody.model.Product;
 
+import java.net.URI;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<Product> productList;  // Danh sách sản phẩm
-    private OnProductClickListener listener;  // Interface xử lý sự kiện click
+    private List<Product> productList;
+    private OnProductActionListener listener;
 
-    // Constructor
-    public ProductAdapter(List<Product> productList, OnProductClickListener listener) {
+    public interface OnProductActionListener {
+        void onDelete(Product product); // Lắng nghe sự kiện xóa
+        void onClick(Product product); // Lắng nghe sự kiện click
+    }
+
+    public ProductAdapter(List<Product> productList, OnProductActionListener listener) {
         this.productList = productList;
         this.listener = listener;
     }
@@ -29,60 +37,38 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate layout cho item product
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(     R.layout.item_product, parent, false);
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        // Lấy sản phẩm tại vị trí
         Product product = productList.get(position);
-
-        // Bind dữ liệu vào ViewHolder
-        holder.nameTextView.setText(product.getName());
-        holder.priceTextView.setText(String.format("%,.0f₫", product.getPrice()));
-
-        // Sử dụng Glide để load hình ảnh sản phẩm
-        Glide.with(holder.itemView.getContext())
-                .load(product.getImage())  // Đảm bảo product.getImage() là URL hoặc resource hợp lệ
-                .placeholder(R.drawable.edit)  // Thêm placeholder (hình ảnh thay thế khi tải)
-                .error(R.drawable.ic_launcher_background)  // Thêm hình ảnh lỗi khi tải không thành công
-                .into(holder.imageView);
-
+        holder.productNameTextView.setText("Sản phâm:" + product.getName());
+        Glide.with(holder.itemView.getContext()).load(product.getImage()).into(holder.productImageView);
+        holder.productPriceTextView.setText("Giá:"+product.getPrice());
+        // Xử lý sự kiện xóa
+        holder.deleteButton.setOnClickListener(v -> listener.onDelete(product));
         // Xử lý sự kiện click
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onProductClick(product);  // Gọi phương thức trong listener
-            }
-        });
+        holder.itemView.setOnClickListener(v -> listener.onClick(product));
     }
 
     @Override
     public int getItemCount() {
-        if (productList != null) {
-            return productList.size();  // Trả về số lượng sản phẩm trong danh sách
-        }
-        return 0;
+        return productList.size();
     }
 
-    // ViewHolder để ánh xạ các view trong item
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView, priceTextView, descriptionTextView;
-        ImageView imageView;
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
+        TextView productNameTextView,productPriceTextView;
+        ImageView productImageView;
+        ImageButton deleteButton;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
-            // Khởi tạo các view
-            nameTextView = itemView.findViewById(R.id.productNameTextView);
-            priceTextView = itemView.findViewById(R.id.productPriceTextView);
-            imageView = itemView.findViewById(R.id.productImageView);
+            productNameTextView = itemView.findViewById(R.id.productNameTextView);
+            productPriceTextView = itemView.findViewById(R.id.productPriceTextView);
+            productImageView = itemView.findViewById(R.id.productImageView);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
-    }
-
-    // Interface để xử lý sự kiện click vào sản phẩm
-    public interface OnProductClickListener {
-        void onProductClick(Product product);  // Phương thức khi sản phẩm được click
     }
 }

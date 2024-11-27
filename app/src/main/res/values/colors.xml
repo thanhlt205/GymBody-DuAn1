@@ -3,12 +3,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="clorBottomNavigation">#fcffcd</color>
+    <color name="purple_500">#d0f1f2</color>
     <color name="colorIcon">#f8b800</color>
     <color name="colorBottom">#68b7c1</color>
     <color name="colorEdt">#909179</color>
     <color name="clorBottomCaiDat">#F2F2D7</color>
     <color name="primary_color">#FF5722</color> <!-- Màu chính -->
     <color name="green">#4CAF50</color> <!-- Màu xanh giá tiền -->
-    <color name="light_gray">#DDDDDD</color> <!-- Màu viền -->
+    <color name="light_gray">#DDDDDD</color>
+    <color name="colorPrimary">#6200EE</color> <!-- Màu chính của ứng dụng -->
+    <color name="colorAccent">#03DAC5</color>
+    <!-- Màu viền -->
 
 </resources>

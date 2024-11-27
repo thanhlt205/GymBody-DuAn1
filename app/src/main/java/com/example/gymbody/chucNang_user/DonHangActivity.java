@@ -24,17 +24,29 @@ public class DonHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_don_hang);
+
+        // Xử lý hiển thị trên toàn màn hình
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Ánh xạ các View
         tabLayout = findViewById(R.id.tabLayout);
         viewPagerDonHang = findViewById(R.id.viewPagerDonHang);
-        viewPagerAdapterDonHang = new ViewPagerAdapterDonHang(this);
+
+        // Nhận thông tin đơn hàng từ Intent
+        Bundle orderInfo = getIntent().getExtras();
+        if (orderInfo == null) {
+            orderInfo = new Bundle(); // Nếu không có thông tin, gửi bundle rỗng
+        }
+
+        // Truyền thông tin cho ViewPagerAdapterDonHang
+        viewPagerAdapterDonHang = new ViewPagerAdapterDonHang(this, orderInfo);
         viewPagerDonHang.setAdapter(viewPagerAdapterDonHang);
 
+        // Xử lý khi chuyển Tab
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -47,9 +59,10 @@ public class DonHangActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
+
+        // Đồng bộ giữa ViewPager và TabLayout
         viewPagerDonHang.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
