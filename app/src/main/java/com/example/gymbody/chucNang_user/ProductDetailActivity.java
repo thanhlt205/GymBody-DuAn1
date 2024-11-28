@@ -3,18 +3,17 @@ package com.example.gymbody.chucNang_user;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +25,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     private ImageView productDetailImageView;
     private TextView productDetailNameTextView, productDetailPriceTextView, productDetailDescriptionTextView;
     private Button addToCartButton;
+
+    private ActivityResultLauncher<Intent> addressActivityLauncher;
+
+    // Dữ liệu cập nhật trong Dialog
+    private String userName = "";
+    private String userPhone = "";
+    private String userAddress = "";
 
     @SuppressLint("CheckResult")
     @Override
@@ -39,6 +45,23 @@ public class ProductDetailActivity extends AppCompatActivity {
         productDetailPriceTextView = findViewById(R.id.productDetailPriceTextView);
         productDetailDescriptionTextView = findViewById(R.id.productDetailDescriptionTextView);
         addToCartButton = findViewById(R.id.addToCartButton);
+
+        // Đăng ký lắng nghe dữ liệu từ DiaChiActivity
+        addressActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Intent data = result.getData();
+                        userName = data.getStringExtra("name");
+                        userPhone = data.getStringExtra("sdt");
+                        userAddress = data.getStringExtra("soNha") + ", " +
+                                data.getStringExtra("tinhThanh") + " - " +
+                                data.getStringExtra("quanHuyen") + " - " +
+                                data.getStringExtra("phuongXa");
+
+                        Toast.makeText(this, "Dịa chỉ đã cập nhật thành công vui lòng ấn mau hàng.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         // Nhận dữ liệu sản phẩm từ Intent
         Intent intent = getIntent();
@@ -55,7 +78,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                         .load(product.getImage())
                         .into(productDetailImageView);
                 Log.e("TAG", "getImage: " + product.getImage());
-
             }
         }
 
@@ -73,13 +95,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         TextView productPriceTextView = orderDialog.findViewById(R.id.orderPriceTextView);
         TextView totalPriceTextView = orderDialog.findViewById(R.id.totalAmountTextView);
         TextView totalPaymentTextView = orderDialog.findViewById(R.id.totalPaymentTextView);
-        EditText nameEditText = orderDialog.findViewById(R.id.nameEditText);
-        EditText phoneEditText = orderDialog.findViewById(R.id.phoneEditText);
-        EditText addressEditText = orderDialog.findViewById(R.id.addressEditText);
+        TextView nameEditText = orderDialog.findViewById(R.id.nameEditText);
+        TextView phoneEditText = orderDialog.findViewById(R.id.phoneEditText);
+        TextView addressEditText = orderDialog.findViewById(R.id.addressEditText);
         RadioGroup paymentMethodGroup = orderDialog.findViewById(R.id.paymentMethodGroup);
         RadioButton airPayOption = orderDialog.findViewById(R.id.airPayOption);
         RadioButton cashOnDeliveryOption = orderDialog.findViewById(R.id.cashOnDeliveryOption);
         Button orderButton = orderDialog.findViewById(R.id.orderButton);
+        Button txtClickOpenAddress = orderDialog.findViewById(R.id.txtClickOpenAddress);
 
         // Thiết lập thông tin sản phẩm
         String productName = productDetailNameTextView.getText().toString();
@@ -95,24 +118,28 @@ public class ProductDetailActivity extends AppCompatActivity {
         totalPriceTextView.setText(String.format("Tổng số tiền (1 sản phẩm): %d₫", (long) totalPrice));
         totalPaymentTextView.setText(String.format("Tổng thanh toán: %d₫", (long) totalPrice));
 
+        // Cập nhật địa chỉ đã chọn nếu có
+        nameEditText.setText(userName);
+        phoneEditText.setText(userPhone);
+        addressEditText.setText(userAddress);
+
+        // Xử lý sự kiện chọn địa chỉ
+        txtClickOpenAddress.setOnClickListener(view -> {
+            Intent intent = new Intent(ProductDetailActivity.this, DiaChiActivity.class);
+            addressActivityLauncher.launch(intent);
+            orderDialog.dismiss();
+        });
+
         // Xử lý sự kiện nút "Đặt Hàng"
         orderButton.setOnClickListener(v -> {
             // Lấy thông tin từ EditText
-            String userName = nameEditText.getText().toString().trim();
-            String userPhone = phoneEditText.getText().toString().trim();
-            String userAddress = addressEditText.getText().toString().trim();
+            String finalUserName = nameEditText.getText().toString().trim();
+            String finalUserPhone = phoneEditText.getText().toString().trim();
+            String finalUserAddress = addressEditText.getText().toString().trim();
 
             // Kiểm tra xem thông tin đã được nhập đầy đủ hay chưa
-            if (userName.isEmpty()) {
-                nameEditText.setError("Vui lòng nhập tên người nhận!");
-                return;
-            }
-            if (userPhone.isEmpty()) {
-                phoneEditText.setError("Vui lòng nhập số điện thoại!");
-                return;
-            }
-            if (userAddress.isEmpty()) {
-                addressEditText.setError("Vui lòng nhập địa chỉ!");
+            if (finalUserName.isEmpty() || finalUserPhone.isEmpty() || finalUserAddress.isEmpty()) {
+                Toast.makeText(this, "Vui lòng chọn địa chỉ nhận hàng!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -128,9 +155,9 @@ public class ProductDetailActivity extends AppCompatActivity {
                     : "Thanh toán khi nhận hàng";
 
             // Hiển thị thông báo xác nhận
-            String orderSummary = "Tên: " + userName + "\n"
-                    + "Số điện thoại: " + userPhone + "\n"
-                    + "Địa chỉ: " + userAddress + "\n"
+            String orderSummary = "Tên: " + finalUserName + "\n"
+                    + "Số điện thoại: " + finalUserPhone + "\n"
+                    + "Địa chỉ: " + finalUserAddress + "\n"
                     + "Phương thức thanh toán: " + paymentMethod + "\n"
                     + "Tổng tiền: " + String.format("%,d₫", (long) totalPrice);
 
@@ -143,26 +170,17 @@ public class ProductDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(ProductDetailActivity.this, DonHangActivity.class);
             intent.putExtra("productName", productName);
             intent.putExtra("productPrice", productPriceText);
-            intent.putExtra("userName", userName);
-            intent.putExtra("userPhone", userPhone);
-            intent.putExtra("userAddress", userAddress);
+            intent.putExtra("userName", finalUserName);
+            intent.putExtra("userPhone", finalUserPhone);
+            intent.putExtra("userAddress", finalUserAddress);
             intent.putExtra("paymentMethod", paymentMethod);
             startActivity(intent);
         });
-
 
         // Hiển thị Dialog
         orderDialog.show();
     }
 
-    /**
-     * Chuyển giá từ chuỗi định dạng sang double.
-     * Ví dụ: "229.000₫" -> 229000.0
-     */
-    /**
-     * Chuyển giá từ chuỗi định dạng sang double.
-     * Ví dụ: "345₫" -> 345.0
-     */
     private double parsePrice(String priceText) {
         try {
             // Loại bỏ ký tự không cần thiết (dấu phân cách và đơn vị tiền tệ)
@@ -173,6 +191,4 @@ public class ProductDetailActivity extends AppCompatActivity {
             return 0;
         }
     }
-
-
 }

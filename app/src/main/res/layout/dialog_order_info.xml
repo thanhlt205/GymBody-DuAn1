@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,11 +13,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="16dp"
             android:text="Thanh toán"
             android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:paddingBottom="16dp" />
+            android:textStyle="bold" />
 
         <!-- Thông tin sản phẩm -->
         <LinearLayout
@@ -41,77 +42,103 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vichy - Gian Hàng Chính Hãng"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/orderPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="229.000đ"
-                    android:paddingTop="4dp" />
+                    android:paddingTop="4dp"
+                    android:text="229.000đ" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Nhập thông tin người dùng -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thông tin người nhận"
-            android:textStyle="bold"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
+            android:layout_height="wrap_content">
 
-        <!-- Tên người nhận -->
-        <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên người nhận"
-            android:inputType="textPersonName" />
 
-        <!-- Số điện thoại -->
-        <EditText
-            android:id="@+id/phoneEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Số điện thoại"
-            android:inputType="phone"
-            android:layout_marginTop="8dp" />
+            <!-- Nhập thông tin người dùng -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:text="Thông tin người nhận"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Địa chỉ -->
-        <EditText
-            android:id="@+id/addressEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Địa chỉ nhận hàng"
-            android:inputType="textPostalAddress"
-            android:layout_marginTop="8dp" />
+            <Button
+                android:id="@+id/txtClickOpenAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="địa chỉ"
+                android:backgroundTint="@color/colorBottom"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Tên người nhận -->
+            <TextView
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:hint="Địa chỉ nhận hàng"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtClickOpenAddress" />
+
+            <!-- Số điện thoại -->
+            <TextView
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="10dp"
+                android:hint="Địa chỉ nhận hàng"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+
+            <!-- Địa chỉ -->
+            <TextView
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="10dp"
+                android:hint="Địa chỉ nhận hàng"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phoneEditText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Tổng tiền -->
         <TextView
             android:id="@+id/totalAmountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng số tiền (1 sản phẩm): 244.000đ"
+            android:paddingTop="16dp"
             android:paddingBottom="8dp"
-            android:paddingTop="16dp" />
+            android:text="Tổng số tiền (1 sản phẩm): 244.000đ" />
 
         <TextView
             android:id="@+id/totalPaymentTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
             android:text="Tổng thanh toán: 244.000đ"
-            android:textStyle="bold"
-            android:paddingBottom="16dp" />
+            android:textStyle="bold" />
 
 
         <!-- Phương thức thanh toán -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phương thức thanh toán"
             android:paddingBottom="8dp"
+            android:text="Phương thức thanh toán"
             android:textStyle="bold" />
 
         <!-- Các phương thức thanh toán sử dụng RadioGroup -->
@@ -126,18 +153,18 @@
                 android:id="@+id/airPayOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ví AirPay"
                 android:drawableStart="@drawable/ic_wallet"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:text="Ví AirPay" />
 
             <!-- Thanh toán khi nhận hàng -->
             <RadioButton
                 android:id="@+id/cashOnDeliveryOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thanh toán khi nhận hàng"
                 android:drawableStart="@drawable/ic_cash"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:text="Thanh toán khi nhận hàng" />
         </RadioGroup>
 
         <!-- Nút đặt hàng -->
@@ -145,10 +172,10 @@
             android:id="@+id/orderButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorBottom"
             android:text="Đặt Hàng"
-            android:backgroundTint="#FF5722"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="16dp" />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </ScrollView>

@@ -44,9 +44,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.productNameTextView.setText("Sản phâm:" + product.getName());
+        holder.productNameTextView.setText(product.getName());
         Glide.with(holder.itemView.getContext()).load(product.getImage()).into(holder.productImageView);
-        holder.productPriceTextView.setText("Giá:"+product.getPrice());
+        holder.productPriceTextView.setText(String.valueOf(product.getPrice()));
         // Xử lý sự kiện xóa
         holder.deleteButton.setOnClickListener(v -> listener.onDelete(product));
         // Xử lý sự kiện click
