@@ -4,11 +4,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.gymbody.model.VideoFavoriteModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,5 +193,46 @@ public class AnhVideoDBhelper extends SQLiteOpenHelper {
 
         return favoriteVideos;
     }
+
+//    public void uploadVideoToGoogleDrive(final Context context, Uri videoUri, final String title, final String date, final String thumbnailUrl) {
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(context);
+//        if (account != null) {
+//            Drive driveService = Drive.getDriveClient(context, account);
+//            DriveContents driveContents = Drive.getDriveContentsClient(context, account);
+//
+//            // Mở video từ URI
+//            driveContents.openFile(videoUri, DriveFile.MODE_READ_WRITE).addOnSuccessListener(new OnSuccessListener<DriveContents>() {
+//                @Override
+//                public void onSuccess(DriveContents result) {
+//                    // Tạo Metadata cho tệp video
+//                    MetadataChangeSet metadataChangeSet = new MetadataChangeSet.Builder()
+//                            .setTitle(title)  // Tiêu đề của video
+//                            .setMimeType("video/mp4") // Định dạng video (bạn có thể thay đổi nếu cần)
+//                            .setDescription("Uploaded by GymBody app")  // Mô tả tệp
+//                            .build();
+//
+//                    // Tạo tệp trên Google Drive
+//                    driveService.createFile(metadataChangeSet, result)
+//                            .addOnSuccessListener(new OnSuccessListener<DriveFile>() {
+//                                @Override
+//                                public void onSuccess(DriveFile driveFile) {
+//                                    // Nhận link của video từ Google Drive
+//                                    String videoDriveUrl = driveFile.getDriveId().asString();
+//                                    Log.d("Drive", "Video uploaded successfully: " + videoDriveUrl);
+//
+//                                    // Sau khi upload, lưu link video vào SQLite
+//                                    insertVideo(title, date, thumbnailUrl, videoDriveUrl);
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Log.e("Drive", "Error uploading video: " + e.getMessage());
+//                                }
+//                            });
+//                }
+//            });
+//        }
+//    }
 
 }

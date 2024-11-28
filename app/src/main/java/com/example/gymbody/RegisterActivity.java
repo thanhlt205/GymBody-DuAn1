@@ -22,12 +22,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword1, edtPassword2;
     private Button btnRegister;
     private TextView txtLogin;
     private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword1 = findViewById(R.id.edtPassword1);
@@ -59,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            addFirebaseFirestore();
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, Login.class));
@@ -70,5 +77,24 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void addFirebaseFirestore(){
+        // Lưu thông tin vào Firestore
+
+        String email = edtEmail.getText().toString().trim();
+
+        String userId = auth.getCurrentUser().getUid();
+        Map<String, Object> user = new HashMap<>();
+        user.put("email", email);
+
+        db.collection("users")
+                .document(userId)
+                .set(user)
+//                .addOnSuccessListener(aVoid -> {
+//                    Toast.makeText(RegisterActivity.this, "Thông tin người dùng đã lưu", Toast.LENGTH_SHORT).show();
+//                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(RegisterActivity.this, "Lưu thông tin thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.gymbody.model.AcountModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -36,6 +38,10 @@ public class ShowAcountActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_show_acount);
 
+        // Khởi tạo Firebase
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         // Cấu hình padding cho các phần tử giao diện khi có hệ thống thanh trạng thái
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -46,46 +52,29 @@ public class ShowAcountActivity extends AppCompatActivity {
         // Khởi tạo các view và đối tượng
         rcvAcount = findViewById(R.id.rcvAcount);
         accountList = new ArrayList<>();
-        adapter = new AcountAdapter(this);  // Tạo đối tượng adapter với context là activity này
-
+        adapter = new AcountAdapter(this, accountList);  // Tạo đối tượng adapter với context là activity này
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         // Cấu hình RecyclerView
-        rcvAcount.setLayoutManager(new LinearLayoutManager(this));  // Cấu hình layout là LinearLayoutManager
-        rcvAcount.setAdapter(adapter);  // Gán adapter cho RecyclerView
-
-        // Khởi tạo Firebase
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        rcvAcount.setLayoutManager(layoutManager);
+        rcvAcount.setAdapter(adapter);
 
         // Lấy danh sách tài khoản người dùng từ Firestore
-//        fetchAccountsFromFirestore();
+        fetchAccountsFromFirestore();
     }
 
     private void fetchAccountsFromFirestore() {
-        db.collection("users")  // "users" là tên collection chứa thông tin tài khoản người dùng
+        db.collection("users")
                 .get()
-                .addOnSuccessListener(querySnapshot -> {
-                    // Duyệt qua tất cả các document trong collection và thêm vào danh sách
-                    for (DocumentSnapshot document : querySnapshot) {
-                        // Giả sử bạn có trường "email" trong mỗi tài liệu người dùng
-                        String email = document.getString("email");
-                        Log.e("TAG", "fetchAccountsFromFirestore: "+ email );
-                        if (email != null) {
-                            AcountModel account = new AcountModel(email);  // Tạo đối tượng AcountModel
-                            accountList.add(account);  // Thêm vào danh sách tài khoản
-                            Log.e("TAG", "fetchAccountsFromFirestore: "+ account.getEmail() );
-                            Log.e("TAG", "fetchAccountsFromFirestore: "+ accountList.size() );
-                        } else {
-                            Log.e("TAGGGGGGGGGG", "size firebase: "+ accountList.size());
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            AcountModel user = document.toObject(AcountModel.class);
+                            accountList.add(user);
                         }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(ShowAcountActivity.this, "Lỗi khi lấy dữ liệu!", Toast.LENGTH_SHORT).show();
                     }
-
-                    // Cập nhật dữ liệu cho adapter và làm mới RecyclerView
-                    adapter.setAcountEmail(accountList);
-                })
-                .addOnFailureListener(e -> {
-                    // Xử lý lỗi nếu không thể lấy dữ liệu
-                    Log.e("TAG", "fetchAccountsFromFirestore: "+ e.getMessage() );
-                    e.printStackTrace();
                 });
     }
 }
