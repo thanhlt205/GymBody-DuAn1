@@ -18,7 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.gymbody.R;
+import com.example.gymbody.dao.StatusProductDAO;
 import com.example.gymbody.model.Product;
+import com.example.gymbody.model.StatusProduct;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -154,27 +156,26 @@ public class ProductDetailActivity extends AppCompatActivity {
                     ? "Ví AirPay"
                     : "Thanh toán khi nhận hàng";
 
-            // Hiển thị thông báo xác nhận
-            String orderSummary = "Tên: " + finalUserName + "\n"
-                    + "Số điện thoại: " + finalUserPhone + "\n"
-                    + "Địa chỉ: " + finalUserAddress + "\n"
-                    + "Phương thức thanh toán: " + paymentMethod + "\n"
-                    + "Tổng tiền: " + String.format("%,d₫", (long) totalPrice);
+//            // Hiển thị thông báo xác nhận
+//            String orderSummary = "Tên: " + finalUserName + "\n"
+//                    + "Số điện thoại: " + finalUserPhone + "\n"
+//                    + "Địa chỉ: " + finalUserAddress + "\n"
+//                    + "Phương thức thanh toán: " + paymentMethod + "\n"
+//                    + "Tổng tiền: " + String.format("%,d₫", (long) totalPrice);
 
-            Toast.makeText(this, "Đặt hàng thành công!\n" + orderSummary, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Đặt hàng thành công!\n" + orderSummary, Toast.LENGTH_LONG).show();
+            StatusProductDAO statusProductDAO = new StatusProductDAO(this);
 
+            StatusProduct statusProduct = new StatusProduct(productName, totalPrice, totalPrice, finalUserAddress, paymentMethod, "Đang xử lý");
+            // Thêm vào cơ sở dữ liệu
+            long result = statusProductDAO.add(statusProduct);
+            if (result != -1) {
+                Toast.makeText(this, "Thêm đơn hàng thành công!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Thêm đơn hàng thất bại!", Toast.LENGTH_SHORT).show();
+            }
             // Đóng dialog
             orderDialog.dismiss();
-
-            // Chuyển sang màn hình DonHangActivity và truyền dữ liệu
-            Intent intent = new Intent(ProductDetailActivity.this, DonHangActivity.class);
-            intent.putExtra("productName", productName);
-            intent.putExtra("productPrice", productPriceText);
-            intent.putExtra("userName", finalUserName);
-            intent.putExtra("userPhone", finalUserPhone);
-            intent.putExtra("userAddress", finalUserAddress);
-            intent.putExtra("paymentMethod", paymentMethod);
-            startActivity(intent);
         });
 
         // Hiển thị Dialog

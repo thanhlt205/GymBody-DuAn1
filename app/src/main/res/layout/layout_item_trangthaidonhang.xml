@@ -5,7 +5,18 @@
     android:layout_margin="8dp"
     android:background="#FFFFFF"
     android:elevation="4dp"
+    android:layout_marginTop="20dp"
     android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tv_order_name"
@@ -13,21 +24,13 @@
         android:layout_height="wrap_content"
         android:text="Tên đơn hàng: ..."
         android:textColor="#000"
+        android:layout_marginEnd="10dp"
         android:textSize="16sp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/tv_order_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_order_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="13/05/2021"
-        android:textColor="#888"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/tv_pay"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address"/>
 
     <TextView
         android:id="@+id/tv_tracking_number"
@@ -43,6 +46,26 @@
         app:layout_constraintTop_toBottomOf="@id/tv_order_name" />
 
     <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Ví"
+        android:textColor="#000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_order_name" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số tiền: 50.000đ"
+        android:textColor="#000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_tracking_number" />
+
+    <TextView
         android:id="@+id/tv_total_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,18 +73,8 @@
         android:textColor="#000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_tracking_number" />
+        app:layout_constraintTop_toTopOf="@id/tv_status" />
 
-    <TextView
-        android:id="@+id/tv_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Số lượng: 2"
-        android:textColor="#000"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tracking_number" />
 
     <TextView
         android:id="@+id/tv_status"
@@ -72,18 +85,6 @@
         android:textColor="#00C853"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_quantity" />
-
-    <Button
-        android:id="@+id/btn_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#EEEEEE"
-        android:padding="8dp"
-        android:text="Chi tiết"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_total_amount" />
+        app:layout_constraintTop_toBottomOf="@id/tv_tracking_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

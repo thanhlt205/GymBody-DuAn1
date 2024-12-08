@@ -107,10 +107,9 @@ public class CaiDatFragment extends Fragment {
         if(email.equals("admin@gmail.com")){
             constraintTkDaDk.setVisibility(View.VISIBLE);
             btnTkDaDk.setOnClickListener(v -> {
-                Toast.makeText(getActivity(), "Thành công click ấn", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getActivity(), ShowAcountActivity.class));
             });
-        }else{
+        }else   {
             btnTkDaDk.setVisibility(View.GONE);
         }
 

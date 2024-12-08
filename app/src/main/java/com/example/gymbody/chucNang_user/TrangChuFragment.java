@@ -19,6 +19,7 @@ import com.example.gymbody.R;
 import com.example.gymbody.adapterVideo.AnhVideoAdapter;
 import com.example.gymbody.dao.AnhVideoDAO;
 import com.example.gymbody.model.AnhVideoModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class TrangChuFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private AnhVideoDAO anhVideoDAO;
     private AnhVideoAdapter adapterAnhVideo;
-    ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
+    private ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
 
     public TrangChuFragment() {
         // Required empty public constructor

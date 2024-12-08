@@ -1,6 +1,7 @@
 package com.example.gymbody.chucNang_user;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.example.gymbody.adapterUser.ProductAdapter;
 import com.example.gymbody.dao.ProductDAO;
 import com.example.gymbody.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,7 @@ public class GioHangFragment extends Fragment {
     private List<Product> filteredProductList = new ArrayList<>(); // Danh sách hiển thị
     private EditText searchEditText;
     private AddProductDialog addProductDialog; // Để lưu trạng thái của Dialog
+    private FirebaseAuth mAuth;
 
     // ActivityResultLauncher để xử lý phản hồi khi chọn ảnh
     private ActivityResultLauncher<Intent> imagePickerLauncher;
@@ -55,6 +58,7 @@ public class GioHangFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
 
         // Đăng ký ActivityResultLauncher để nhận kết quả khi chọn ảnh
         imagePickerLauncher = registerForActivityResult(
@@ -90,17 +94,26 @@ public class GioHangFragment extends Fragment {
         productAdapter = new ProductAdapter(filteredProductList, new ProductAdapter.OnProductActionListener() {
             @Override
             public void onDelete(Product product) {
-                // Xóa sản phẩm khỏi cơ sở dữ liệu
-                productDAO.deleteProduct(product);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(false);
+                builder.setTitle("Thông báo");
+                builder.setMessage("Bạn chắc chắn muốn xóa chứ?");
+                builder.setPositiveButton("Có", (dialog, which) -> {
 
-                // Xóa sản phẩm khỏi danh sách hiển thị
-                originalProductList.remove(product);
-                filteredProductList.remove(product);
+                    // Xóa sản phẩm khỏi cơ sở dữ liệu
+                    productDAO.deleteProduct(product);
 
-                // Cập nhật RecyclerView
-                productAdapter.notifyDataSetChanged();
+                    // Xóa sản phẩm khỏi danh sách hiển thị
+                    originalProductList.remove(product);
+                    filteredProductList.remove(product);
 
-                Toast.makeText(getContext(), "Sản phẩm đã được xóa", Toast.LENGTH_SHORT).show();
+                    // Cập nhật RecyclerView
+                    productAdapter.notifyDataSetChanged();
+
+                    Toast.makeText(getContext(), "Sản phẩm đã được xóa", Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("Không", (dialog, which) -> dialog.dismiss());
+                builder.show();
             }
 
             @Override
@@ -124,10 +137,12 @@ public class GioHangFragment extends Fragment {
         // Lắng nghe thay đổi trên thanh tìm kiếm
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -138,22 +153,29 @@ public class GioHangFragment extends Fragment {
 
         // Xử lý nút thêm sản phẩm
         FloatingActionButton addProductButton = view.findViewById(R.id.addProductButton);
-        addProductButton.setOnClickListener(v -> {
+
+        String email = mAuth.getCurrentUser().getEmail().trim();
+        if (email.equals("admin@gmail.com")) {
+            addProductButton.setVisibility(View.VISIBLE);
+
+            addProductButton.setOnClickListener(v -> {
 //            // Khởi tạo AddProductDialog và truyền vào ActivityResultLauncher
-            addProductDialog = new AddProductDialog(getContext(), newProduct -> {
-                // Xử lý khi sản phẩm được thêm
-                productDAO.addProduct(newProduct);
-                originalProductList.add(newProduct);
-                filteredProductList.add(newProduct);
-                productAdapter.notifyDataSetChanged();
-                Toast.makeText(getContext(), "Sản phẩm đã được thêm", Toast.LENGTH_SHORT).show();
+                addProductDialog = new AddProductDialog(getContext(), newProduct -> {
+                    // Xử lý khi sản phẩm được thêm
+                    productDAO.addProduct(newProduct);
+                    originalProductList.add(newProduct);
+                    filteredProductList.add(newProduct);
+                    productAdapter.notifyDataSetChanged();
+                    Toast.makeText(getContext(), "Sản phẩm đã được thêm thành công", Toast.LENGTH_SHORT).show();
+                });
+
+                // Truyền ActivityResultLauncher vào Dialog để xử lý chọn ảnh
+                addProductDialog.setImagePickerLauncher(imagePickerLauncher);
+                addProductDialog.show();
             });
-
-            // Truyền ActivityResultLauncher vào Dialog để xử lý chọn ảnh
-            addProductDialog.setImagePickerLauncher(imagePickerLauncher);
-            addProductDialog.show();
-        });
-
+        } else {
+            addProductButton.setVisibility(View.GONE);
+        }
         return view;
     }
 

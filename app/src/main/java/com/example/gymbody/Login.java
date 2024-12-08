@@ -100,5 +100,9 @@ public class Login extends AppCompatActivity {
         txtRegister.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, RegisterActivity.class));
         });
+        txtResetPassword.setOnClickListener(view -> {
+            startActivity(new Intent(Login.this, ResetPasswordActivity.class));
+        });
+
     }
 }

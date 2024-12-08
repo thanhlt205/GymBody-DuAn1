@@ -1,5 +1,6 @@
 package com.example.gymbody.chucNang_user;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,18 +36,18 @@ public class ShowVideoActivity extends AppCompatActivity {
     private String idVideo;
     private ImageView imgPlayVideo, imgScreenQuayVideo;
     private SeekBar seekBarVideo;
-    FrameLayout videoFrame;
-    LinearLayout thoiGian;
+    private FrameLayout videoFrame;
+    private LinearLayout thoiGian;
     private TextView thoiGianChayVideo, thoiGianVideo;
     private RecyclerView recyclerView;
     private VideoView videoView;
     private AnhVideoDAO anhVideoDAO;
     private AnhVideoAdapter adapterAnhVideo;
-    ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
+    private ArrayList<AnhVideoModel> arrayList = new ArrayList<>();
 
     private Handler handler = new Handler();
     private int viTriHienTai = 0;
-    private boolean isLandscape = false;
+    private boolean isLandscape = true;
     private boolean isSeeking = false;  // Để tránh việc xung đột khi người dùng đang kéo
 
     @Override
@@ -174,10 +175,13 @@ public class ShowVideoActivity extends AppCompatActivity {
 //        imgScreenQuayVideo.setOnClickListener(view -> {
 //            if (isLandscape) {
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                isLandscape = false;
 //            } else {
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//                isLandscape = true;
 //            }
 //        });
+
 
 
         // Hiển thị dữ liệu vào RecyclerView

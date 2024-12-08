@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiaChiDAO {
-    DiaChiDBHelper dbHelper;
     SQLiteDatabase db;
+    DiaChiDBHelper dbHelper;
 
     public DiaChiDAO(Context context) {
         dbHelper = new DiaChiDBHelper(context);

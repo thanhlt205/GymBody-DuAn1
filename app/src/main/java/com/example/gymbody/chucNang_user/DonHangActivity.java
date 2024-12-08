@@ -36,14 +36,14 @@ public class DonHangActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         viewPagerDonHang = findViewById(R.id.viewPagerDonHang);
 
-        // Nhận thông tin đơn hàng từ Intent
-        Bundle orderInfo = getIntent().getExtras();
-        if (orderInfo == null) {
-            orderInfo = new Bundle(); // Nếu không có thông tin, gửi bundle rỗng
-        }
+//        // Nhận thông tin đơn hàng từ Intent
+//        Bundle orderInfo = getIntent().getExtras();
+//        if (orderInfo == null) {
+//            orderInfo = new Bundle(); // Nếu không có thông tin, gửi bundle rỗng
+//        }
 
-        // Truyền thông tin cho ViewPagerAdapterDonHang
-        viewPagerAdapterDonHang = new ViewPagerAdapterDonHang(this, orderInfo);
+//        // Truyền thông tin cho ViewPagerAdapterDonHang
+        viewPagerAdapterDonHang = new ViewPagerAdapterDonHang(this);
         viewPagerDonHang.setAdapter(viewPagerAdapterDonHang);
 
         // Xử lý khi chuyển Tab

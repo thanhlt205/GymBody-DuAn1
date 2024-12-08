@@ -3,88 +3,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".chucNang_user.donHang.DangXuLiFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <!--    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:backgroundTint="#FFFFFF"-->
+    <!--        android:padding="16dp"-->
+    <!--        app:cardCornerRadius="10dp"-->
+    <!--        app:cardElevation="6dp">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            &lt;!&ndash; Tên sản phẩm &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/productNameTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="8dp"-->
+    <!--                android:text="Tên sản phẩm"-->
+    <!--                android:textColor="#000000"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--            &lt;!&ndash; Giá sản phẩm &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/productPriceTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="12dp"-->
+    <!--                android:text="Giá"-->
+    <!--                android:textColor="#FF5722"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--            &lt;!&ndash; Tên người nhận &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/userNameTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="8dp"-->
+    <!--                android:text="Tên người nhận"-->
+    <!--                android:textColor="#000000"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--            &lt;!&ndash; Số điện thoại người nhận &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/userPhoneTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="8dp"-->
+    <!--                android:text="Số điện thoại"-->
+    <!--                android:textColor="#000000"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--            &lt;!&ndash; Địa chỉ người nhận &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/userAddressTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginBottom="12dp"-->
+    <!--                android:text="Địa chỉ"-->
+    <!--                android:textColor="#000000"-->
+    <!--                android:textSize="16sp" />-->
+
+    <!--            &lt;!&ndash; Phương thức thanh toán &ndash;&gt;-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/paymentMethodTextView"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Phương thức thanh toán"-->
+    <!--                android:textColor="#000000"-->
+    <!--                android:textSize="16sp" />-->
+    <!--        </LinearLayout>-->
+    <!--    </androidx.cardview.widget.CardView>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvStatusProduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:padding="16dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="6dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Tên sản phẩm -->
-            <TextView
-                android:id="@+id/productNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Tên sản phẩm"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <!-- Giá sản phẩm -->
-            <TextView
-                android:id="@+id/productPriceTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Giá"
-                android:textColor="#FF5722"
-                android:textSize="16sp" />
-
-            <!-- Tên người nhận -->
-            <TextView
-                android:id="@+id/userNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Tên người nhận"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <!-- Số điện thoại người nhận -->
-            <TextView
-                android:id="@+id/userPhoneTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Số điện thoại"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <!-- Địa chỉ người nhận -->
-            <TextView
-                android:id="@+id/userAddressTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Địa chỉ"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-
-            <!-- Phương thức thanh toán -->
-            <TextView
-                android:id="@+id/paymentMethodTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phương thức thanh toán"
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

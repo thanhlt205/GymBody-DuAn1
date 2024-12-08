@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("email", email);
 
-        db.collection("users")
+        db.collection("users_acount")
                 .document(userId)
                 .set(user)
 //                .addOnSuccessListener(aVoid -> {

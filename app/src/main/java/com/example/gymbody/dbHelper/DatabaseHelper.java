@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "GymBody.db";
-    private static final int DATABASE_VERSION = 2; // Cập nhật phiên bản DB
+    private static final String DATABASE_NAME = "products.db";
+    private static final int DATABASE_VERSION = 5; // Cập nhật phiên bản DB
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -18,15 +18,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Products (id INTEGER PRIMARY KEY, image TEXT, name TEXT, price REAL, description TEXT)");
 
         // Chèn dữ liệu giả vào bảng Products
-        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-nen-trai-dat.jpg', 'Sản phẩm 1', 100.0, 'Mô tả sản phẩm 1')");
-        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/8/23/1084256/295497942_2922294937.jpg', 'Sản phẩm 2', 200.0, 'Mô tả sản phẩm 2')");
-        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('https://baohanam.com.vn/DATA/IMAGES/2022/09/09/20220909085625-56niem-vui-dc-mua.jpg', 'Sản phẩm 3', 300.0, 'Mô tả sản phẩm 3')");
+        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('content://media/external/images/media/4049', 'Đôi tạ tay', 239, 'Sản phẩm tạ tay chuyên sử dụng tạ tay')");
+        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('content://media/external/images/media/4045', 'Lò so kháng lực', 89, 'Sản phẩm lò so tập kháng lực tay')");
+        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('content://media/external/images/media/4047', 'Thảm tập luyện tại nhà', 99, 'Sản phẩm thân thiện với môi trường và thoải mái chuyên dụng tại nhà')");
+        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('content://media/external/images/media/4048', 'Trọn bộ tạ tập luyện 24 món', 1299, 'Sản phẩm tập luyện 24 món chuyên dụng tại nhà')");
+        db.execSQL("INSERT INTO Products (image, name, price, description) VALUES ('content://media/external/images/media/4044', 'Dụng cụ hồ trợ ngăn ngừa trai sạm tay chân', 99, 'Sản phẩm thân thiện thoải mái và dễ sử dụng')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 2) {
-            // Thêm cột description vào bảng Products khi nâng cấp
+            // Thêm cột description vào bảng Product khi nâng cấp
             db.execSQL("ALTER TABLE Products ADD COLUMN description TEXT");
         }
     }

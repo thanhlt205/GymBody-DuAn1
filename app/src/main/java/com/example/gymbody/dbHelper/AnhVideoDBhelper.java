@@ -24,7 +24,7 @@ import java.util.List;
 
 public class AnhVideoDBhelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "anhVideo.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String TABLE_NAME = "anhVideo";
     public static final String TABLE_NAME_FAVORITES = "favorite_videos";
     public static final String COLUMN_ID = "id";
@@ -89,17 +89,20 @@ public class AnhVideoDBhelper extends SQLiteOpenHelper {
                     COLUMN_TIEUDE + ", " +
                     COLUMN_NGAY + ", " +
                     COLUMN_ANH_URL + ", " +
-                    COLUMN_VIDEO_URL + ") VALUES ('Bài tập bụng', '2024-11-15', 'https://baohanam.com.vn/DATA/IMAGES/2022/09/09/20220909085625-56niem-vui-dc-mua.jpg', 'content://media/external/video/media/2434')";
+                    COLUMN_VIDEO_URL + ") VALUES ('Bài tập full tay', '2024-12-07', 'content://media/external/images/media/4004', 'content://media/external/video/media/4002')";
 
             String insert2 = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_TIEUDE + ", " + COLUMN_NGAY + ", " + COLUMN_ANH_URL + ", " + COLUMN_VIDEO_URL + ") " +
-                    "VALUES ('Bài tập chân', '2024-12-16', 'https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2022/8/23/1084256/295497942_2922294937.jpg', 'content://media/external/video/media/3771')";
+                    "VALUES ('Kỹ thuật tập lưng', '2024-12-08', 'content://media/external/images/media/4006', 'content://media/external/video/media/4005')";
 
             String insert3 = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_TIEUDE + ", " + COLUMN_NGAY + ", " + COLUMN_ANH_URL + ", " + COLUMN_VIDEO_URL + ") " +
-                    "VALUES ('Bài tập tay', '2024-10-15', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-nen-trai-dat.jpg', 'content://media/external/video/media/2434')";
+                    "VALUES ('Các bài tập chỉ với tạ đơn', '2024-11-28', 'content://media/external/images/media/4008', 'content://media/external/video/media/4007')";
+            String insert4 = "INSERT INTO " + TABLE_NAME + " (" + COLUMN_TIEUDE + ", " + COLUMN_NGAY + ", " + COLUMN_ANH_URL + ", " + COLUMN_VIDEO_URL + ") " +
+                    "VALUES ('Bài tập ngực & tay', '2024-11-18', 'content://media/external/images/media/4010', 'content://media/external/video/media/4009')";
 
             db.execSQL(insert1);
             db.execSQL(insert2);
             db.execSQL(insert3);
+            db.execSQL(insert4);
             Log.e("Database", "Sample data inserted successfully");
         } catch (Exception e) {
             Log.e("Database Error", "Error inserting sample data: " + e.getMessage());

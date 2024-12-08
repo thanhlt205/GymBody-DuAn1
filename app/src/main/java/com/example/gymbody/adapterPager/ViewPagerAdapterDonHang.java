@@ -15,9 +15,8 @@ public class ViewPagerAdapterDonHang extends FragmentStateAdapter {
 
     private Bundle orderInfo; // Lưu thông tin đơn hàng
 
-    public ViewPagerAdapterDonHang(@NonNull FragmentActivity fragmentActivity, Bundle orderInfo) {
+    public ViewPagerAdapterDonHang(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.orderInfo = orderInfo; // Lưu thông tin nhận được từ Activity
     }
 
     @NonNull
@@ -26,7 +25,7 @@ public class ViewPagerAdapterDonHang extends FragmentStateAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = DangXuLiFragment.newInstance(orderInfo); // Truyền thông tin cho "Đang xử lý"
+                fragment = new DangXuLiFragment(); // Truyền thông tin cho "Đang xử lý"
                 break;
             case 1:
                 fragment = new DaGiaoFragment(); // Không truyền dữ liệu, giữ trống
